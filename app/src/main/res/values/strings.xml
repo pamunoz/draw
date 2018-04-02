@@ -12,4 +12,6 @@
     <string name="agence_demo_application">Agence Demo Application</string>
     <string name="username_hint">UserName</string>
     <string name="password_hint">Password</string>
+    <string name="btn_sign_up">Don\'t hava an Account? Sign up now!</string>
+    <string name="btn_sign_in">Sign In</string>
 </resources>

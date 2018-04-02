@@ -2,68 +2,94 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="50dp"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:background="#d2d1d1"
+    android:paddingEnd="50dp"
+    android:orientation="vertical">
 
     <View
-        android:layout_weight="0.65"
+        android:layout_weight="0.2203"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"/>
 
     <TextView
         android:id="@+id/login_title"
-        android:layout_weight="0.2"
+        android:layout_weight="0.0677"
+        android:textColor="@color/colorSecondaryDark"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_height="0dp"
         android:text="@string/agence_demo_application"
         android:textSize="22sp" />
 
     <EditText
         android:id="@+id/username_edittext"
-        android:layout_weight="0.2"
+        android:background="@color/white"
+        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
+        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
+        android:layout_weight="0.0677"
+        android:textSize="14sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_height="0dp"
         android:hint="@string/username_hint"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textPersonName"
+        android:layout_marginBottom="2dp"/>
     <EditText
         android:id="@+id/password_edittext"
-        android:layout_weight="0.2"
+        android:paddingLeft="5dp"
+        android:paddingStart="5dp"
+        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
+        android:background="@color/white"
+        android:layout_weight="0.0677"
+        android:textSize="14sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_height="0dp"
         android:hint="@string/password_hint"
         android:inputType="textPassword" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.032" />
+
     <Button
         android:id="@+id/btn_sign_in"
-        android:layout_weight="0.2"
+        android:layout_weight="0.0777"
+        android:textColor="@color/white"
+        android:text="@string/btn_sign_in"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:background="@color/primary_color"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false" />
+        android:layout_height="0dp" />
 
     <View
+        android:layout_weight="0.0338"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1" />
-
-    <View
-        android:layout_weight="0.1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"/>
 
     <Button
         android:id="@+id/btn_sign_up"
-        android:layout_weight="0.2"
+        android:layout_weight="0.0567"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        android:text="@string/btn_sign_up"
+        android:textColor="@color/colorSecondary"
         android:layout_width="match_parent"
-        android:layout_height="127dp"
-        android:baselineAligned="false" />
+        android:layout_height="0dp"/>
     <View
-        android:layout_weight="0.33898305"
+        android:layout_weight="0.305"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"/>
 
     <!--
     <LinearLayout
