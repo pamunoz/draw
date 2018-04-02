@@ -1,4 +1,4 @@
-package com.pfariasmunoz.drawingapp.data.source.local
+package com.pfariasmunoz.drawingapp.data.source.model
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity

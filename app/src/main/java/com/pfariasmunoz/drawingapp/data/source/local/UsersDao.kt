@@ -1,6 +1,7 @@
 package com.pfariasmunoz.drawingapp.data.source.local
 
 import android.arch.persistence.room.*
+import com.pfariasmunoz.drawingapp.data.source.model.User
 
 /**
  * Data Access Object for the users table.

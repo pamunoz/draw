@@ -1,7 +1,7 @@
 package com.pfariasmunoz.drawingapp.data
 
 import com.pfariasmunoz.drawingapp.data.source.UsersDataSource
-import com.pfariasmunoz.drawingapp.data.source.local.User
+import com.pfariasmunoz.drawingapp.data.source.model.User
 
 /**
  * Concrete implementation to load users from the data sources into a cache.
