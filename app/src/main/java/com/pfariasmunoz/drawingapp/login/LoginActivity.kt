@@ -32,10 +32,7 @@ class LoginActivity : AppCompatActivity(), SmartLoginCallbacks {
             //facebookAppId = getString(R.string.facebook_app_id)
             //facebookPermissions = null
             //googleApiClient = null
-
         }
-
-
     }
 
     override fun onResume() {
