@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import com.pfariasmunoz.drawingapp.HomeActivity
 import com.pfariasmunoz.drawingapp.R
+import com.pfariasmunoz.drawingapp.signup.SignupActivity
 import com.pfariasmunoz.drawingapp.util.toast
 import kotlinx.android.synthetic.main.activity_signin.*
 import studios.codelight.smartloginlibrary.*
@@ -27,13 +28,14 @@ class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
         setListeners()
-
+        
         config = SmartLoginConfig(this, this).apply {
             //facebookAppId = getString(R.string.facebook_app_id)
             //facebookPermissions = null
             //googleApiClient = null
         }
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -42,14 +44,14 @@ class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
     }
 
     private fun refreshLayout() {
-        user = UserSessionManager.getCurrentUser(this) ?: return
-        if (user != null) {
-            setVisibilityToLoginViews(View.GONE)
-            logout_button.visibility = View.VISIBLE
-        } else {
-            setVisibilityToLoginViews(View.VISIBLE)
-            logout_button.visibility = View.GONE
-        }
+//        user = UserSessionManager.getCurrentUser(this) ?: return
+//        if (user != null) {
+//            setVisibilityToLoginViews(View.GONE)
+//            logout_button.visibility = View.VISIBLE
+//        } else {
+//            setVisibilityToLoginViews(View.VISIBLE)
+//            logout_button.visibility = View.GONE
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -70,64 +72,69 @@ class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
     }
 
     override fun doCustomLogin() = SmartUser().apply {
-        email = email_edittext.text.toString()
+        //email = email_edittext.text.toString()
         Log.i("SigninActivity", email)
     }
 
     override fun doCustomSignup() = SmartUser().apply {
-        email = email_edittext.text.toString()
+        //email = email_edittext.text.toString()
         Log.i("SigninActivity", email)
     }
 
     private fun setListeners() {
-        facebook_login_button.setOnClickListener({
-            login = SmartLoginFactory.build(LoginType.Facebook).apply {
-                login(config)
-            }
 
+        btn_sign_up.setOnClickListener({
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
         })
-        google_login_button.setOnClickListener({
-            login = SmartLoginFactory.build(LoginType.Google).apply {
-                login(config)
-            }
-        })
-        custom_signin_button.setOnClickListener({
-            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
-                login(config)
-            }
-        })
-        custom_signup_button.setOnClickListener({
-            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
-                signup(config)
-            }
-        })
-
-        logout_button.setOnClickListener({
-            if (user != null) {
-                login = when(user) {
-                    is SmartFacebookUser -> {
-                        SmartLoginFactory.build(LoginType.Facebook)
-                    }
-                    is SmartGoogleUser -> {
-                        SmartLoginFactory.build(LoginType.Google)
-                    }
-                    else -> {
-                        val smartLogin = SmartLoginFactory.build(LoginType.CustomLogin)
-                        val result: Boolean = smartLogin.logout(this)
-                        if (result) refreshLayout()
-                        smartLogin
-                    }
-                }
-            }
-        })
+//        facebook_login_button.setOnClickListener({
+//            login = SmartLoginFactory.build(LoginType.Facebook).apply {
+//                login(config)
+//            }
+//
+//        })
+//        google_login_button.setOnClickListener({
+//            login = SmartLoginFactory.build(LoginType.Google).apply {
+//                login(config)
+//            }
+//        })
+//        custom_signin_button.setOnClickListener({
+//            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
+//                login(config)
+//            }
+//        })
+//        custom_signup_button.setOnClickListener({
+//            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
+//                signup(config)
+//            }
+//        })
+//
+//        logout_button.setOnClickListener({
+//            if (user != null) {
+//                login = when(user) {
+//                    is SmartFacebookUser -> {
+//                        SmartLoginFactory.build(LoginType.Facebook)
+//                    }
+//                    is SmartGoogleUser -> {
+//                        SmartLoginFactory.build(LoginType.Google)
+//                    }
+//                    else -> {
+//                        val smartLogin = SmartLoginFactory.build(LoginType.CustomLogin)
+//                        val result: Boolean = smartLogin.logout(this)
+//                        if (result) refreshLayout()
+//                        smartLogin
+//                    }
+//                }
+//            }
+//        })
     }
 
     private fun setVisibilityToLoginViews(visibility: Int) {
-        facebook_login_button.visibility = visibility
-        google_login_button.visibility = visibility
-        custom_signin_button.visibility = visibility
-        custom_signup_button.visibility = visibility
-        email_edittext.visibility = visibility
+//        facebook_login_button.visibility = visibility
+//        google_login_button.visibility = visibility
+//        custom_signin_button.visibility = visibility
+//        custom_signup_button.visibility = visibility
+//        email_edittext.visibility = visibility
         password_edittext.visibility = visibility
     }
 
