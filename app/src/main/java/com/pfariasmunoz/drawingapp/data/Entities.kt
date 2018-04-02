@@ -14,7 +14,7 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "users")
 data class User(
         @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "entryId") var id: Long?,
+        @ColumnInfo(name = "_id") var id: Long?,
         @ColumnInfo(name = "password") val password: String = "",
         @ColumnInfo(name = "login") var login: String = "")
 
@@ -28,6 +28,5 @@ data class User(
 @Entity(tableName = "drawings")
 data class Drawing(
         @PrimaryKey(autoGenerate = true)
-        var id: Long?,
-        @ColumnInfo(name = "name") var name: String,
-        @ColumnInfo(name = "userId")var userId: String)
+        @ColumnInfo(name = "_id") var id: Long?,
+        @ColumnInfo(typeAffinity = ColumnInfo.BLOB) var image: ByteArray? = null)
