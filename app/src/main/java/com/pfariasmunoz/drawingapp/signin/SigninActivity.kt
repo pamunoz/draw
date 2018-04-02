@@ -1,4 +1,4 @@
-package com.pfariasmunoz.drawingapp.login
+package com.pfariasmunoz.drawingapp.signin
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -8,7 +8,7 @@ import android.view.View
 import com.pfariasmunoz.drawingapp.HomeActivity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.util.toast
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_signin.*
 import studios.codelight.smartloginlibrary.*
 import studios.codelight.smartloginlibrary.SmartLoginCallbacks
 import studios.codelight.smartloginlibrary.users.SmartFacebookUser
@@ -17,7 +17,7 @@ import studios.codelight.smartloginlibrary.users.SmartUser
 import studios.codelight.smartloginlibrary.util.SmartLoginException
 
 
-class LoginActivity : AppCompatActivity(), SmartLoginCallbacks {
+class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
 
     lateinit var user: SmartUser
     lateinit var config: SmartLoginConfig
@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity(), SmartLoginCallbacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_signin)
         setListeners()
 
         config = SmartLoginConfig(this, this).apply {
@@ -66,17 +66,17 @@ class LoginActivity : AppCompatActivity(), SmartLoginCallbacks {
 
     override fun onLoginFailure(e: SmartLoginException) {
         toast(e.message!!)
-        Log.i("LoginActivity", e.message)
+        Log.i("SigninActivity", e.message)
     }
 
     override fun doCustomLogin() = SmartUser().apply {
         email = email_edittext.text.toString()
-        Log.i("LoginActivity", email)
+        Log.i("SigninActivity", email)
     }
 
     override fun doCustomSignup() = SmartUser().apply {
         email = email_edittext.text.toString()
-        Log.i("LoginActivity", email)
+        Log.i("SigninActivity", email)
     }
 
     private fun setListeners() {

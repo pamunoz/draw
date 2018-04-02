@@ -14,4 +14,8 @@
     <string name="password_hint">Password</string>
     <string name="btn_sign_up">Don\'t hava an Account? Sign up now!</string>
     <string name="btn_sign_in">Sign In</string>
+    <string name="title_sign_up">Sign Up</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_signin">I already have a account, Sign in now!</string>
 </resources>
