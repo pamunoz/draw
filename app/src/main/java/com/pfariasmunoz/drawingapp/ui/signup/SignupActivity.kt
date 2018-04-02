@@ -1,10 +1,10 @@
-package com.pfariasmunoz.drawingapp.signup
+package com.pfariasmunoz.drawingapp.ui.signup
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.pfariasmunoz.drawingapp.R
-import com.pfariasmunoz.drawingapp.signin.SigninActivity
+import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
 import kotlinx.android.synthetic.main.activity_signin.*
 
 class SignupActivity : AppCompatActivity() {

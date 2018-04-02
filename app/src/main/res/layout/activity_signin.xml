@@ -80,7 +80,7 @@
         android:textAllCaps="false"
         android:textSize="16sp"
         android:gravity="center"
-        android:background="@android:color/transparent"
+        style="@android:style/Widget.Holo.Button.Borderless"
         android:text="@string/btn_sign_up"
         android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"

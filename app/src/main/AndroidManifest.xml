@@ -9,15 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/GrayBackground">
-        <activity android:name=".HomeActivity"></activity>
-        <activity android:name=".signin.SigninActivity">
+        <activity android:name="com.pfariasmunoz.drawingapp.ui.home.HomeActivity">
+
+        </activity>
+        <activity android:name="com.pfariasmunoz.drawingapp.ui.signin.SigninActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".signup.SignupActivity"></activity>
+        <activity android:name="com.pfariasmunoz.drawingapp.ui.signup.SignupActivity">
+
+        </activity>
     </application>
 
 </manifest>

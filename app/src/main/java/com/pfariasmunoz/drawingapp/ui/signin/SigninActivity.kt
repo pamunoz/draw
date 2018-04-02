@@ -1,19 +1,16 @@
-package com.pfariasmunoz.drawingapp.signin
+package com.pfariasmunoz.drawingapp.ui.signin
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import com.pfariasmunoz.drawingapp.HomeActivity
+import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.R
-import com.pfariasmunoz.drawingapp.signup.SignupActivity
+import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
 import com.pfariasmunoz.drawingapp.util.toast
 import kotlinx.android.synthetic.main.activity_signin.*
 import studios.codelight.smartloginlibrary.*
 import studios.codelight.smartloginlibrary.SmartLoginCallbacks
-import studios.codelight.smartloginlibrary.users.SmartFacebookUser
-import studios.codelight.smartloginlibrary.users.SmartGoogleUser
 import studios.codelight.smartloginlibrary.users.SmartUser
 import studios.codelight.smartloginlibrary.util.SmartLoginException
 
@@ -28,7 +25,7 @@ class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
         setListeners()
-        
+
         config = SmartLoginConfig(this, this).apply {
             //facebookAppId = getString(R.string.facebook_app_id)
             //facebookPermissions = null

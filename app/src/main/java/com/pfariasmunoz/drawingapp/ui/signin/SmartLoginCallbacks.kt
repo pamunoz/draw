@@ -1,4 +1,4 @@
-package com.pfariasmunoz.drawingapp.signin
+package com.pfariasmunoz.drawingapp.ui.signin
 
 import studios.codelight.smartloginlibrary.users.SmartUser
 import studios.codelight.smartloginlibrary.util.SmartLoginException

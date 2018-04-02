@@ -1,7 +1,8 @@
-package com.pfariasmunoz.drawingapp
+package com.pfariasmunoz.drawingapp.ui.home
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.pfariasmunoz.drawingapp.R
 
 class HomeActivity : AppCompatActivity() {
 
