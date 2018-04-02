@@ -2,6 +2,7 @@ package com.pfariasmunoz.drawingapp.data
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ForeignKey
 import android.arch.persistence.room.PrimaryKey
 
 /**
@@ -11,10 +12,14 @@ import android.arch.persistence.room.PrimaryKey
  * @param password password of the user
  * @param login login of the user
  */
-@Entity(tableName = "users")
+@Entity(tableName = "users", foreignKeys = [(ForeignKey(
+        entity = Drawing::class,
+        parentColumns = arrayOf("_id"),
+        childColumns = arrayOf("drawing_id")))])
 data class User(
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "_id") var id: Long?,
+        @ColumnInfo(name = "drawing_id") val drawingId: Long,
         @ColumnInfo(name = "password") val password: String = "",
         @ColumnInfo(name = "login") var login: String = "")
 
@@ -22,8 +27,7 @@ data class User(
  * Model class for a Drawing.
  *
  * @param id id of the drawing
- * @param name name of the drawing
- * @param userId user id of the [User]
+ * @param image the drawing to be saved
  */
 @Entity(tableName = "drawings")
 data class Drawing(
