@@ -5,7 +5,9 @@ buildscript {
     ext.versions = [
             kotlin : '1.2.31',
             room   : '1.0.0',
-            coroutines : '0.22.5'
+            coroutines : '0.22.5',
+            login : '1.2',
+            support : '27.0.2'
     ]
     repositories {
         google()
