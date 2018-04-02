@@ -1,13 +1,138 @@
 package com.pfariasmunoz.drawingapp.login
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import com.pfariasmunoz.drawingapp.HomeActivity
 import com.pfariasmunoz.drawingapp.R
+import com.pfariasmunoz.drawingapp.util.toast
+import kotlinx.android.synthetic.main.activity_login.*
+import studios.codelight.smartloginlibrary.*
+import studios.codelight.smartloginlibrary.SmartLoginCallbacks
+import studios.codelight.smartloginlibrary.users.SmartFacebookUser
+import studios.codelight.smartloginlibrary.users.SmartGoogleUser
+import studios.codelight.smartloginlibrary.users.SmartUser
+import studios.codelight.smartloginlibrary.util.SmartLoginException
 
-class LoginActivity : AppCompatActivity() {
+
+class LoginActivity : AppCompatActivity(), SmartLoginCallbacks {
+
+    lateinit var user: SmartUser
+    lateinit var config: SmartLoginConfig
+    lateinit var login: SmartLogin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        setListeners()
+
+        config = SmartLoginConfig(this, this).apply {
+            //facebookAppId = getString(R.string.facebook_app_id)
+            //facebookPermissions = null
+            //googleApiClient = null
+
+        }
+
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        user = UserSessionManager.getCurrentUser(this) ?: return
+        refreshLayout()
+    }
+
+    private fun refreshLayout() {
+        user = UserSessionManager.getCurrentUser(this) ?: return
+        if (user != null) {
+            setVisibilityToLoginViews(View.GONE)
+            logout_button.visibility = View.VISIBLE
+        } else {
+            setVisibilityToLoginViews(View.VISIBLE)
+            logout_button.visibility = View.GONE
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        login?.onActivityResult(requestCode, resultCode, data, config)
+    }
+
+    override fun onLoginSuccess(user: SmartUser) {
+        toast(user.toString())
+        refreshLayout()
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onLoginFailure(e: SmartLoginException) {
+        toast(e.message!!)
+        Log.i("LoginActivity", e.message)
+    }
+
+    override fun doCustomLogin() = SmartUser().apply {
+        email = email_edittext.text.toString()
+        Log.i("LoginActivity", email)
+    }
+
+    override fun doCustomSignup() = SmartUser().apply {
+        email = email_edittext.text.toString()
+        Log.i("LoginActivity", email)
+    }
+
+    private fun setListeners() {
+        facebook_login_button.setOnClickListener({
+            login = SmartLoginFactory.build(LoginType.Facebook).apply {
+                login(config)
+            }
+
+        })
+        google_login_button.setOnClickListener({
+            login = SmartLoginFactory.build(LoginType.Google).apply {
+                login(config)
+            }
+        })
+        custom_signin_button.setOnClickListener({
+            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
+                login(config)
+            }
+        })
+        custom_signup_button.setOnClickListener({
+            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
+                signup(config)
+            }
+        })
+
+        logout_button.setOnClickListener({
+            if (user != null) {
+                login = when(user) {
+                    is SmartFacebookUser -> {
+                        SmartLoginFactory.build(LoginType.Facebook)
+                    }
+                    is SmartGoogleUser -> {
+                        SmartLoginFactory.build(LoginType.Google)
+                    }
+                    else -> {
+                        val smartLogin = SmartLoginFactory.build(LoginType.CustomLogin)
+                        val result: Boolean = smartLogin.logout(this)
+                        if (result) refreshLayout()
+                        smartLogin
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setVisibilityToLoginViews(visibility: Int) {
+        facebook_login_button.visibility = visibility
+        google_login_button.visibility = visibility
+        custom_signin_button.visibility = visibility
+        custom_signup_button.visibility = visibility
+        email_edittext.visibility = visibility
+        password_edittext.visibility = visibility
+    }
+
+
 }
