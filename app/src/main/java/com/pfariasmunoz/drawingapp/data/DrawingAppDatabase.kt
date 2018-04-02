@@ -1,0 +1,27 @@
+package com.pfariasmunoz.drawingapp.data
+
+import android.arch.persistence.room.Database
+import android.arch.persistence.room.Room
+import android.arch.persistence.room.RoomDatabase
+import android.content.Context
+
+@Database(entities = [User::class, Drawing::class], version = 1)
+abstract class DrawingAppDatabase : RoomDatabase() {
+    abstract fun getDrawingsDao(): DrawingsDao
+    abstract fun getUsersDao(): UsersDao
+
+    companion object {
+        private var INSTANCE: DrawingAppDatabase? = null
+        private val lock = Any()
+        fun getInstance(context: Context): DrawingAppDatabase {
+            synchronized(lock) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.applicationContext,
+                            DrawingAppDatabase::class.java, "drawings.db")
+                            .build()
+                }
+                return INSTANCE!!
+            }
+        }
+    }
+}
