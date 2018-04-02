@@ -6,7 +6,7 @@ import android.arch.persistence.room.*
  * Data Access Object for the drawings table.
  */
 @Dao
-interface drawingDao {
+interface DrawingsDao {
 
     /**
      * Insert a drawing in the database. If the drawing already exists, replace it.
