@@ -4,7 +4,8 @@ buildscript {
     ext.kotlin_version = '1.2.31'
     ext.versions = [
             kotlin : '1.2.31',
-            room   : '1.0.0'
+            room   : '1.0.0',
+            coroutines : '0.22.5'
     ]
     repositories {
         google()

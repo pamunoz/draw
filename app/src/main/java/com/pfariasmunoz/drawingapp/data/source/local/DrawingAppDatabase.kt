@@ -1,4 +1,4 @@
-package com.pfariasmunoz.drawingapp.data
+package com.pfariasmunoz.drawingapp.data.source.local
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
