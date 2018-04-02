@@ -7,7 +7,6 @@ import android.content.Context
 
 @Database(entities = [User::class, Drawing::class], version = 1)
 abstract class DrawingAppDatabase : RoomDatabase() {
-    abstract fun getDrawingsDao(): DrawingsDao
     abstract fun getUsersDao(): UsersDao
 
     companion object {

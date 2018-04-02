@@ -9,4 +9,7 @@ interface UsersDataSource {
     suspend fun saveUser(user: User)
     suspend fun deleteAllUsers()
     suspend fun deleteUser(userId: Long)
+    suspend fun getDrawing(userId: Long): ByteArray?
+    suspend fun refreshUsers()
+
 }
