@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pfariasmunoz.drawingapp">
+          package="com.pfariasmunoz.drawingapp">
 
     <application
         android:allowBackup="true"
@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/GrayBackground">
-        <activity android:name="com.pfariasmunoz.drawingapp.ui.home.HomeActivity">
-
+        <activity android:name=".ui.home.HomeActivity">
         </activity>
-        <activity android:name="com.pfariasmunoz.drawingapp.ui.signin.SigninActivity">
+        <activity android:name=".ui.signin.SigninActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.pfariasmunoz.drawingapp.ui.signup.SignupActivity">
-
+        <activity android:name=".ui.signup.SignupActivity">
+        </activity>
+        <activity android:name=".ui.drawing.DrawingActivity">
         </activity>
     </application>
 
