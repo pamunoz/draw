@@ -1,8 +1,6 @@
 package com.pfariasmunoz.drawingapp.di.modules
 
-import android.arch.persistence.room.Room
 import android.content.Context
-import com.pfariasmunoz.drawingapp.data.source.UsersDataSource
 import com.pfariasmunoz.drawingapp.data.source.local.UsersAppDatabase
 import com.pfariasmunoz.drawingapp.data.source.local.UsersDao
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
@@ -13,7 +11,6 @@ import dagger.Provides
 import kotlinx.coroutines.experimental.DefaultDispatcher
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.newFixedThreadPoolContext
-import javax.inject.Named
 import kotlin.coroutines.experimental.CoroutineContext
 
 @Module

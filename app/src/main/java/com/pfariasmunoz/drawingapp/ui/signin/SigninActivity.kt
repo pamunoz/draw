@@ -1,21 +1,37 @@
 package com.pfariasmunoz.drawingapp.ui.signin
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.R
+import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
 import com.pfariasmunoz.drawingapp.util.toast
 import kotlinx.android.synthetic.main.activity_signin.*
-import studios.codelight.smartloginlibrary.*
+import studios.codelight.smartloginlibrary.SmartLogin
 import studios.codelight.smartloginlibrary.SmartLoginCallbacks
+import studios.codelight.smartloginlibrary.SmartLoginConfig
+import studios.codelight.smartloginlibrary.UserSessionManager
 import studios.codelight.smartloginlibrary.users.SmartUser
 import studios.codelight.smartloginlibrary.util.SmartLoginException
 
 
-class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
+class SigninActivity : AppCompatActivity(), SmartLoginCallbacks, SinginContract.View {
+
+
+
+    override fun getUserName(): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getUserPassword(): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun signIn() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     lateinit var user: SmartUser
     lateinit var config: SmartLoginConfig
@@ -31,6 +47,7 @@ class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
             //facebookPermissions = null
             //googleApiClient = null
         }
+
     }
 
 
@@ -84,54 +101,11 @@ class SigninActivity : AppCompatActivity(), SmartLoginCallbacks {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         })
-//        facebook_login_button.setOnClickListener({
-//            login = SmartLoginFactory.build(LoginType.Facebook).apply {
-//                login(config)
-//            }
-//
-//        })
-//        google_login_button.setOnClickListener({
-//            login = SmartLoginFactory.build(LoginType.Google).apply {
-//                login(config)
-//            }
-//        })
-//        custom_signin_button.setOnClickListener({
-//            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
-//                login(config)
-//            }
-//        })
-//        custom_signup_button.setOnClickListener({
-//            login = SmartLoginFactory.build(LoginType.CustomLogin).apply {
-//                signup(config)
-//            }
-//        })
-//
-//        logout_button.setOnClickListener({
-//            if (user != null) {
-//                login = when(user) {
-//                    is SmartFacebookUser -> {
-//                        SmartLoginFactory.build(LoginType.Facebook)
-//                    }
-//                    is SmartGoogleUser -> {
-//                        SmartLoginFactory.build(LoginType.Google)
-//                    }
-//                    else -> {
-//                        val smartLogin = SmartLoginFactory.build(LoginType.CustomLogin)
-//                        val result: Boolean = smartLogin.logout(this)
-//                        if (result) refreshLayout()
-//                        smartLogin
-//                    }
-//                }
-//            }
-//        })
+
     }
 
     private fun setVisibilityToLoginViews(visibility: Int) {
-//        facebook_login_button.visibility = visibility
-//        google_login_button.visibility = visibility
-//        custom_signin_button.visibility = visibility
-//        custom_signup_button.visibility = visibility
-//        email_edittext.visibility = visibility
+
         password_edittext.visibility = visibility
     }
 

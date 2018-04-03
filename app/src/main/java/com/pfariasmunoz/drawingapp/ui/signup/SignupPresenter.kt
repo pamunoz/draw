@@ -1,17 +1,9 @@
 package com.pfariasmunoz.drawingapp.ui.signup
 
-import com.pfariasmunoz.drawingapp.data.source.UsersDataSource
-import com.pfariasmunoz.drawingapp.data.source.local.UsersAppDatabase
-import com.pfariasmunoz.drawingapp.data.source.local.UsersDao
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
-import com.pfariasmunoz.drawingapp.util.AppExecutors
-import com.pfariasmunoz.drawingapp.util.THREAD_COUNT
 import com.pfariasmunoz.drawingapp.util.launchSilent
-import kotlinx.coroutines.experimental.DefaultDispatcher
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.newFixedThreadPoolContext
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
