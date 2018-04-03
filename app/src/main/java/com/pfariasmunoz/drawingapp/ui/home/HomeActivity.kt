@@ -1,5 +1,6 @@
 package com.pfariasmunoz.drawingapp.ui.home
 
+import android.graphics.BitmapFactory
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.pfariasmunoz.drawingapp.R
@@ -20,6 +21,8 @@ class HomeActivity : AppCompatActivity() {
         btn_users_list.setOnClickListener({
             launchActivity<UserListActivity>()
         })
+
+        
 
     }
 }
