@@ -5,38 +5,46 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
+import com.pfariasmunoz.drawingapp.util.positiveButton
+import com.pfariasmunoz.drawingapp.util.showAlertDialog
 import kotlinx.android.synthetic.main.activity_signin.*
+import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity(), SignupContract.View {
 
+    lateinit var presenter: SignupPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+
+        setListeners()
     }
 
-    override fun getUserName(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getUserName() = login_edittext.text.toString()
 
-    override fun getFirstPassword(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun getFirstPassword() = first_password_edittext.text.toString()
 
     override fun getSecondPassword(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return confirm_password_edittext.text.toString()
     }
-
-    override fun signup() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-
 
     private fun setListeners() {
-        btn_sign_in.setOnClickListener({
+        btn_signin.setOnClickListener({
             val intent = Intent(this, SigninActivity::class.java)
             startActivity(intent)
+        })
+
+        btn_register.setOnClickListener({
+            if (presenter.checkedPassword()) {
+                presenter.saveUser()
+            } else {
+                showAlertDialog {
+                    title = "nothing"
+                    setMessage("Passwords don't match!")
+                    positiveButton("OK") {  }
+                }
+            }
         })
     }
 }

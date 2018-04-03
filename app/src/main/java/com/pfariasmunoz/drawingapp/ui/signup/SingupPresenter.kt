@@ -17,18 +17,14 @@ class SignupPresenter(
 
     override fun saveUser() = launchSilent(uiContext) {
         val login = view.getUserName()
-        val password = checkedPassword()
+        val password = if (checkedPassword()) view.getFirstPassword() else ""
         val byteArray = ByteArray(10)
         usersDataSource.saveUser(User(login = login, password = password, drawing = byteArray))
 
     }
 
-    override fun checkedPassword(): String {
-        return if (view.getFirstPassword().equals(view.getSecondPassword())) {
-            view.getFirstPassword()
-        } else {
-            ""
-        }
+    override fun checkedPassword(): Boolean {
+        return  (view.getFirstPassword().equals(view.getSecondPassword()))
     }
 
 }

@@ -7,11 +7,10 @@ interface SignupContract {
         fun getUserName(): String
         fun getFirstPassword(): String
         fun getSecondPassword(): String
-        fun signup()
     }
 
     interface Presenter {
         fun saveUser()
-        fun checkedPassword(): String
+        fun checkedPassword(): Boolean
     }
 }

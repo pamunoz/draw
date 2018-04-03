@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.widget.Toast
+import org.jetbrains.anko.AlertDialogBuilder
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT ).show()
 
@@ -42,3 +44,20 @@ inline fun <reified T : Any> Context.launchActivity(
 
 inline fun <reified T : Any> newIntent(context: Context): Intent =
         Intent(context, T::class.java)
+
+inline fun Context.showAlertDialog(dialogBuilder: AlertDialog.Builder.() -> Unit) {
+    val builder = AlertDialog.Builder(this)
+    builder.dialogBuilder()
+    builder.create().show()
+}
+
+fun AlertDialog.Builder.positiveButton(text: String = "OK", handleClick: (which: Int) -> Unit = {})
+{
+    this.setPositiveButton(text, {_, which -> handleClick(which)})
+}
+
+fun AlertDialog.Builder.negativeButton(text: String = "Cancel", handleClick: (which: Int) -> Unit = {})
+{
+    this.setNegativeButton(text, {_, which -> handleClick(which)})
+}
+
