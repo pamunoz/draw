@@ -1,19 +1,23 @@
 package com.pfariasmunoz.drawingapp.di
 
 import android.content.Context
+import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.di.modules.ContextModule
 import com.pfariasmunoz.drawingapp.di.modules.DatabaseModule
-import com.pfariasmunoz.drawingapp.di.modules.SingupModule
-import com.pfariasmunoz.drawingapp.ui.signup.SignupContract
 import com.pfariasmunoz.drawingapp.ui.signup.SignupPresenter
+import kotlinx.coroutines.experimental.android.UI
 import dagger.Component
+import kotlin.coroutines.experimental.CoroutineContext
 
-@Component(modules = [ContextModule::class, SingupModule::class, DatabaseModule::class])
+@Component(modules = [ContextModule::class, DatabaseModule::class])
 interface AppComponent {
     fun appContext(): Context
 
-    fun signupView(): SignupContract.View
-
     fun signupPresenter(): SignupPresenter
+
+    fun localUsersDataSource(): UsersLocalDataSource
+
+    fun coroutineUIContext(): CoroutineContext
+
 
 }

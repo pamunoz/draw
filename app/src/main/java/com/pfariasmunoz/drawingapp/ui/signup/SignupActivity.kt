@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.pfariasmunoz.drawingapp.R
+import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
 import com.pfariasmunoz.drawingapp.util.positiveButton
 import com.pfariasmunoz.drawingapp.util.showAlertDialog
@@ -12,12 +13,16 @@ import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity(), SignupContract.View {
 
-    lateinit var presenter: SignupPresenter
+    val presenter: SignupPresenter
+
+    init {
+        this.presenter = Injector.get().signupPresenter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-
+        presenter.setUpView(this)
         setListeners()
     }
 
@@ -42,7 +47,9 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
                 showAlertDialog {
                     title = "nothing"
                     setMessage("Passwords don't match!")
-                    positiveButton("OK") {  }
+                    positiveButton("OK") {
+                        
+                    }
                 }
             }
         })

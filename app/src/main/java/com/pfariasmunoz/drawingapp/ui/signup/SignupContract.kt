@@ -10,6 +10,7 @@ interface SignupContract {
     }
 
     interface Presenter {
+        fun setUpView(view: View)
         fun saveUser()
         fun checkedPassword(): Boolean
     }
