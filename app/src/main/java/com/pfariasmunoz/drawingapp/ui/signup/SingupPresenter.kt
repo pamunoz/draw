@@ -4,12 +4,11 @@ import com.pfariasmunoz.drawingapp.data.source.UsersDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import kotlinx.coroutines.experimental.android.UI
-import java.util.*
-import kotlin.collections.ArrayList
+import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
 
-class SignupPresenter(
+class SignupPresenter @Inject constructor(
         private val view: SignupContract.View,
         private val usersDataSource: UsersDataSource,
         private val uiContext: CoroutineContext = UI) : SignupContract.Presenter {
