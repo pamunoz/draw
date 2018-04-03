@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".ui.drawing.DrawingActivity">
         </activity>
-        <activity android:name=".ui.userslist.DrawingActivity">
+        <activity android:name=".ui.userslist.UserListActivity">
         </activity>
     </application>
 
