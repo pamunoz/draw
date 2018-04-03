@@ -1,5 +1,6 @@
 package com.pfariasmunoz.drawingapp.data.source.local
 
+import android.support.annotation.VisibleForTesting
 import com.pfariasmunoz.drawingapp.data.LocalDataNotFoundException
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.UsersDataSource
@@ -41,6 +42,25 @@ class UsersLocalDataSource private constructor(
 
     override suspend fun updateUser(user: User): Int = withContext(appExecutors.ioContext) {
         usersDao.updateUser(user)
+    }
+
+    companion object {
+        private var INSTANCE: UsersLocalDataSource? = null
+
+        @JvmStatic
+        fun getInstance(appExecutors: AppExecutors, tasksDao: UsersDao): UsersLocalDataSource {
+            if (INSTANCE == null) {
+                synchronized(UsersLocalDataSource::javaClass) {
+                    INSTANCE = UsersLocalDataSource(appExecutors, tasksDao)
+                }
+            }
+            return INSTANCE!!
+        }
+
+        @VisibleForTesting
+        fun clearInstance() {
+            INSTANCE = null
+        }
     }
 
 }

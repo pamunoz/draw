@@ -22,7 +22,5 @@ class HomeActivity : AppCompatActivity() {
             launchActivity<UserListActivity>()
         })
 
-        
-
     }
 }

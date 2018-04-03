@@ -4,11 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-kotlin {
-    experimental {
-        coroutines 'enable'
-    }
-}
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -28,25 +24,39 @@ android {
     }
 }
 
+kotlin {
+    experimental {
+        coroutines 'enable'
+    }
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
     implementation "com.android.support:appcompat-v7:$versions.support"
 
+    // Room (use 1.1.0-beta1 for latest beta)
+
+    implementation "android.arch.persistence.room:runtime:$versions.room"
+    kapt "android.arch.persistence.room:compiler:$versions.room"
+
     implementation "android.arch.lifecycle:runtime:$versions.arch"
     implementation "android.arch.lifecycle:extensions:$versions.arch"
     kapt "android.arch.lifecycle:compiler:$versions.arch"
+
+    implementation "android.arch.lifecycle:extensions:$versions.arch"
+    kapt "android.arch.lifecycle:compiler:$versions.arch"
+
+    implementation "codelight.studios:android-smart-login:$versions.login"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
-    // Room (use 1.1.0-beta1 for latest beta)
-    implementation "android.arch.persistence.room:runtime:$versions.room"
-    annotationProcessor "android.arch.persistence.room:compiler:$versions.room"
-
-    implementation "codelight.studios:android-smart-login:$versions.login"
 
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$versions.anko"

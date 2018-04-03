@@ -8,34 +8,24 @@ import com.pfariasmunoz.drawingapp.data.source.model.User
 
 @Database(entities = [User::class], version = 1, exportSchema = false)
 abstract class UsersAppDatabase : RoomDatabase() {
-    abstract fun getUsersDao(): UsersDao
+
+    abstract fun usersDao(): UsersDao
 
     companion object {
-        var testMode = false
-        private val databaseName = "users.db"
-        private var db: UsersAppDatabase? = null
-        private var dbInstance: UsersDao? = null
+
+        private var INSTANCE: UsersAppDatabase? = null
 
         private val lock = Any()
-        fun getInstance(context: Context): UsersDao {
+
+        fun getInstance(context: Context): UsersAppDatabase {
             synchronized(lock) {
-                if (dbInstance == null) {
-                    if (testMode) {
-                        db = Room.inMemoryDatabaseBuilder(context, UsersAppDatabase::class.java)
-                                .allowMainThreadQueries().build()
-                        dbInstance = db?.getUsersDao()
-                    } else {
-                        db = Room.databaseBuilder(context.applicationContext,
-                                UsersAppDatabase::class.java, databaseName)
-                                .build()
-                        dbInstance = db?.getUsersDao()
-                    }
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.applicationContext,
+                            UsersAppDatabase::class.java, "users.db")
+                            .build()
                 }
-                return dbInstance!!
+                return INSTANCE!!
             }
-        }
-        private fun close() {
-            db?.close()
         }
     }
 }
