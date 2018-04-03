@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import android.support.test.filters.LargeTest
 import android.support.test.runner.AndroidJUnit4
+import android.util.Log
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.util.SingleExecutors
@@ -17,6 +18,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.runner.RunWith
+import java.util.*
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -49,7 +51,7 @@ class UsersLocalDataSourceTest {
     @Test
     fun saveUser_retrieveUser() = runBlockingSilent {
         // Given a new User
-        val newUser = User(drawing = ByteArray(10),login = "Pablo", password = "iklru667", id = 1L)
+        val newUser = User(drawing = ByteArray(10),login = "Pablo", password = "iklru667")
         with(localDataSource) {
             saveUser(newUser)
             // Then the user can be retrieved from the persistent repository
@@ -65,7 +67,7 @@ class UsersLocalDataSourceTest {
     fun deleteAllUsers_emptyListOfRetrievedUser() = runBlockingSilent {
         with(localDataSource) {
             // Given a new user in the persistent repository and a mocked callback
-            val newUser = User(drawing = ByteArray(10),login = "Pablo", password = "667ruikl", id = 222L)
+            val newUser = User(drawing = ByteArray(10),login = "Pablo", password = "667ruikl")
             saveUser(newUser)
 
             // When all users are deleted
@@ -81,8 +83,9 @@ class UsersLocalDataSourceTest {
     fun getUsers_retrieveSavedUsers() = runBlockingSilent {
         // Given 2 new tasks in the persistent repository
         with(localDataSource) {
-            val user1 = User(drawing = ByteArray(10),login = "Person1", password = "111qqq", id = 1L)
-            val user2 = User(drawing = ByteArray(10),login = "Person2", password = "222www", id = 2L)
+            val user1 = User(drawing = ByteArray(10),login = "Person1", password = "111qqq")
+            val user2 = User(drawing = ByteArray(10),login = "Person2", password = "222www")
+
             saveUser(user1)
             saveUser(user2)
 
@@ -103,6 +106,9 @@ class UsersLocalDataSourceTest {
                         user2IdFount = true
                     }
                 }
+
+                Log.i("USER 1 ID: ", "ID = ${user1.id}")
+                Log.i("USER 2 ID: ", "ID = ${user2.id}")
 
                 assertTrue(user1IdFount)
                 assertTrue(user2IdFount)

@@ -2,15 +2,16 @@ package com.pfariasmunoz.drawingapp.ui.signup
 
 import com.pfariasmunoz.drawingapp.data.source.model.User
 
-interface SingupContract {
+interface SignupContract {
     interface View {
         fun getUserName(): String
         fun getFirstPassword(): String
         fun getSecondPassword(): String
+        fun signup()
     }
 
     interface Presenter {
-        fun signup(user: User)
-        fun checkPassword()
+        fun saveUser()
+        fun checkedPassword(): String
     }
 }

@@ -23,7 +23,7 @@ class UsersLocalDataSource private constructor(
         }
     }
 
-    override suspend fun getUser(userId: Long): Result<User> = withContext(appExecutors.ioContext){
+    override suspend fun getUser(userId: String): Result<User> = withContext(appExecutors.ioContext){
         val user = usersDao.getUserById(userId)
         if (user != null) Result.Success(user) else Result.Error(LocalDataNotFoundException())
     }
@@ -36,7 +36,7 @@ class UsersLocalDataSource private constructor(
         usersDao.deleteUsers()
     }
 
-    override suspend fun deleteUser(userId: Long) = withContext(appExecutors.ioContext) {
+    override suspend fun deleteUser(userId: String) = withContext(appExecutors.ioContext) {
         usersDao.deleteUserById(userId)
     }
 

@@ -2,6 +2,7 @@ package com.pfariasmunoz.drawingapp.data.source.model
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 import java.util.*
 
@@ -15,10 +16,10 @@ import java.util.*
  */
 @Entity(tableName = "users")
 data class User(
-        @PrimaryKey(autoGenerate = true)
-        @ColumnInfo(name = "_id") val id: Long,
-        @ColumnInfo(name = "drawing", typeAffinity = ColumnInfo.BLOB) val drawing: ByteArray?,
-        @ColumnInfo(name = "password") val password: String,
+        @PrimaryKey
+        @ColumnInfo(name = "_id") var id: String = UUID.randomUUID().toString(),
+        @ColumnInfo(name = "drawing", typeAffinity = ColumnInfo.BLOB) var drawing: ByteArray?,
+        @ColumnInfo(name = "password") var password: String,
         @ColumnInfo(name = "login") var login: String) {
 
         override fun equals(other: Any?): Boolean {

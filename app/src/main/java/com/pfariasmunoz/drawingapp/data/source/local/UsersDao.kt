@@ -21,7 +21,7 @@ interface UsersDao {
      * @param userId the user id.
      * @return the user with userId.
      */
-    @Query("SELECT * FROM users WHERE _id = :userId") fun getUserById(userId: Long): User?
+    @Query("SELECT * FROM users WHERE _id = :userId") fun getUserById(userId: String): User?
 
     /**
      * Insert a user in the database. If the user already exists, replace it.
@@ -43,7 +43,7 @@ interface UsersDao {
      *
      * @return the number of users deleted. This should always be 1.
      */
-    @Query("DELETE FROM users WHERE _id = :userId") fun deleteUserById(userId: Long): Int
+    @Query("DELETE FROM users WHERE _id = :userId") fun deleteUserById(userId: String): Int
 
     /**
      * Delete all users.
