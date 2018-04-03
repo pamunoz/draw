@@ -44,6 +44,9 @@ dependencies {
 
     implementation "codelight.studios:android-smart-login:$versions.login"
 
+    // Anko
+    implementation "org.jetbrains.anko:anko-commons:$versions.anko"
+
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
