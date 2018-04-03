@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".ui.drawing.DrawingActivity">
         </activity>
+        <activity android:name=".ui.userslist.DrawingActivity">
+        </activity>
     </application>
 
 </manifest>

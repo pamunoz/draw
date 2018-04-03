@@ -16,5 +16,6 @@ class HomeActivity : AppCompatActivity() {
         btn_draw.setOnClickListener({
             launchActivity<DrawingActivity> {  }
         })
+
     }
 }
