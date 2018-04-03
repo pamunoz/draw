@@ -11,7 +11,7 @@ import com.pfariasmunoz.drawingapp.data.source.model.User
  * obtained from the server, by using the remote data source only if the local database doesn't
  * exist or is empty.
  */
-class UsersRepository(
+class Repo(
         val usersRemoteDataSource: UsersDataSource? = null,
         val usersLocalDataSource: UsersDataSource? = null
 ): UsersDataSource {
@@ -143,7 +143,7 @@ class UsersRepository(
 
     companion object {
 
-        private var INSTANCE: UsersRepository? = null
+        private var INSTANCE: Repo? = null
 
         /**
          * Returns the single instance of this class, creating it if necessary.
@@ -151,12 +151,12 @@ class UsersRepository(
          * *
          * @param usersLocalDataSource  the device storage data source
          * *
-         * @return the [UsersRepository] instance
+         * @return the [Repo] instance
          */
         @JvmStatic
         fun getInstance(usersRemoteDataSource: UsersDataSource,
-                        usersLocalDataSource: UsersDataSource): UsersRepository {
-            return INSTANCE ?: UsersRepository(usersRemoteDataSource, usersLocalDataSource)
+                        usersLocalDataSource: UsersDataSource): Repo {
+            return INSTANCE ?: Repo(usersRemoteDataSource, usersLocalDataSource)
                     .apply { INSTANCE = this }
         }
 
