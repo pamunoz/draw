@@ -8,7 +8,6 @@ import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
 import com.pfariasmunoz.drawingapp.util.positiveButton
 import com.pfariasmunoz.drawingapp.util.showAlertDialog
-import kotlinx.android.synthetic.main.activity_signin.*
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity(), SignupContract.View {

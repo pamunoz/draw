@@ -1,6 +1,7 @@
 package com.pfariasmunoz.drawingapp.ui.signin
 
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
+import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
@@ -20,4 +21,7 @@ class SigninPresenter @Inject constructor(): SinginContract.Presenter {
         this.view = view
     }
 
+    override fun findUser(userId: String): User {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

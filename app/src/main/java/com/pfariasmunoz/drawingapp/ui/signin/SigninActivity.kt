@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pfariasmunoz.drawingapp.R
+import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_signin.*
@@ -12,6 +13,11 @@ import kotlinx.android.synthetic.main.activity_signin.*
 class SigninActivity : AppCompatActivity(), SinginContract.View {
 
     val presenter: SigninPresenter
+    override var currentUser: User
+        get() = presenter.findUser("some id")
+        set(value) {
+
+        }
 
     init {
         this.presenter = Injector.get().signinPresenter()
@@ -36,7 +42,4 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
 
     }
 
-    override fun findUser(userId: String): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

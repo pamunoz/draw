@@ -1,12 +1,15 @@
 package com.pfariasmunoz.drawingapp.ui.signin
 
+import com.pfariasmunoz.drawingapp.data.source.model.User
+
 interface SinginContract {
 
     interface View {
-        fun findUser(userId: String): Boolean
+        var currentUser: User
     }
 
     interface Presenter {
         fun funSetupView(view: View)
+        fun findUser(userId: String): User
     }
 }
