@@ -34,7 +34,7 @@ class UsersLocalDataSource private constructor(
 
     override suspend fun getUserByPassword(userPassword: String): Result<User> =
             withContext(appExecutors.ioContext){
-        val user = usersDao.getUserById(userPassword)
+        val user = usersDao.getUserByPassword(userPassword)
         if (user != null) Result.Success(user)
         else Result.Error(LocalDataNotFoundException())
     }

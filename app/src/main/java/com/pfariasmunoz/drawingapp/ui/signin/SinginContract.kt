@@ -7,12 +7,14 @@ interface SinginContract {
 
 
     interface View {
-        var userId: String
+        fun showSigninError()
+        fun signin()
     }
 
     interface Presenter {
-        var currentUser: User
+        var currentUserId: String
         fun funSetupView(view: View)
-        fun findUser(userId: String): User
+        fun findUser(userId: String)
+        fun checkUser(login: String, password: String)
     }
 }
