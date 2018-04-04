@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.pfariasmunoz.drawingapp.R
+import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
 import com.pfariasmunoz.drawingapp.util.toast
@@ -19,7 +20,11 @@ import studios.codelight.smartloginlibrary.util.SmartLoginException
 
 class SigninActivity : AppCompatActivity(), SmartLoginCallbacks, SinginContract.View {
 
+    val presenter: SigninPresenter
 
+    init {
+        this.presenter = Injector.get().signinPresenter()
+    }
 
     override fun getUserName(): String {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
