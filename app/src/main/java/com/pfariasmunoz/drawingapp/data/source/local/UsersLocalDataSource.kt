@@ -15,7 +15,8 @@ class UsersLocalDataSource private constructor(
 ) : UsersDataSource {
 
 
-    override suspend fun getUsers(): Result<List<User>> = withContext(appExecutors.ioContext) {
+    override suspend fun getUsers(): Result<List<User>> =
+            withContext(appExecutors.ioContext) {
         val users = usersDao.getUsers()
         if (users.isNotEmpty()) {
             Result.Success(usersDao.getUsers())
@@ -24,24 +25,37 @@ class UsersLocalDataSource private constructor(
         }
     }
 
-    override suspend fun getUser(userId: String): Result<User> = withContext(appExecutors.ioContext){
+    override suspend fun getUserById(userId: String): Result<User> =
+            withContext(appExecutors.ioContext){
         val user = usersDao.getUserById(userId)
-        if (user != null) Result.Success(user) else Result.Error(LocalDataNotFoundException())
+        if (user != null) Result.Success(user)
+        else Result.Error(LocalDataNotFoundException())
     }
 
-    override suspend fun saveUser(user: User) = withContext(appExecutors.ioContext){
+    override suspend fun getUserByPassword(userPassword: String): Result<User> =
+            withContext(appExecutors.ioContext){
+        val user = usersDao.getUserById(userPassword)
+        if (user != null) Result.Success(user)
+        else Result.Error(LocalDataNotFoundException())
+    }
+
+    override suspend fun saveUser(user: User) =
+            withContext(appExecutors.ioContext){
         usersDao.insertUser(user)
     }
 
-    override suspend fun deleteAllUsers() = withContext(appExecutors.ioContext) {
+    override suspend fun deleteAllUsers() =
+            withContext(appExecutors.ioContext) {
         usersDao.deleteUsers()
     }
 
-    override suspend fun deleteUser(userId: String) = withContext(appExecutors.ioContext) {
+    override suspend fun deleteUser(userId: String) =
+            withContext(appExecutors.ioContext) {
         usersDao.deleteUserById(userId)
     }
 
-    override suspend fun updateUser(user: User): Int = withContext(appExecutors.ioContext) {
+    override suspend fun updateUser(user: User): Int =
+            withContext(appExecutors.ioContext) {
         usersDao.updateUser(user)
     }
 

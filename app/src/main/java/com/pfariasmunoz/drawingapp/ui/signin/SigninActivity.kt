@@ -36,16 +36,7 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
 
     }
 
-    override fun getUserName(): String {
+    override fun findUser(userId: String): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-    override fun getUserPassword(): String {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun signIn() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 }

@@ -24,6 +24,15 @@ interface UsersDao {
     @Query("SELECT * FROM users WHERE _id = :userId") fun getUserById(userId: String): User?
 
     /**
+     * Select a user by password.
+     *
+     * @param userPassword the user password.
+     * @return the user with it password.
+     */
+    @Query("SELECT * FROM users WHERE password = :userPassword")
+    fun getUserByPassword(userPassword: String): User?
+
+    /**
      * Insert a user in the database. If the user already exists, replace it.
      *
      * @param user the task to be inserted.
