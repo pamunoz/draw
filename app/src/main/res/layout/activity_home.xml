@@ -10,13 +10,15 @@
 
     <Button
         android:id="@+id/btn_draw"
-        style="@android:style/Widget.Holo.Button.Borderless"
+        android:textColor="@color/colorSecondaryDark"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_draw" />
     <Button
         android:id="@+id/btn_users_list"
-        style="@android:style/Widget.Holo.Button.Borderless"
+        android:textColor="@color/colorSecondaryDark"
+        android:textAllCaps="false"
         android:layout_width="match_parent"
         android:text="@string/btn_list_users"
         android:layout_height="wrap_content" />
