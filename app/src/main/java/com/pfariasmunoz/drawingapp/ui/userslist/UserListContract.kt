@@ -6,6 +6,7 @@ interface UserListContract {
     }
 
     interface Presenter {
+        fun setupView(view: View)
         fun loadUsers()
     }
 }
