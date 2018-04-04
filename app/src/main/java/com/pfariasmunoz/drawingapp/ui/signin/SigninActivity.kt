@@ -13,15 +13,14 @@ import kotlinx.android.synthetic.main.activity_signin.*
 class SigninActivity : AppCompatActivity(), SinginContract.View {
 
     val presenter: SigninPresenter
-    override var currentUser: User
-        get() = presenter.findUser("some id")
-        set(value) {
-
-        }
 
     init {
         this.presenter = Injector.get().signinPresenter()
     }
+
+    override val userId: String
+        get() = intent.extras.getString("userId")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -4,11 +4,14 @@ import com.pfariasmunoz.drawingapp.data.source.model.User
 
 interface SinginContract {
 
+
+
     interface View {
-        var currentUser: User
+        val userId: String
     }
 
     interface Presenter {
+        var currentUser: User
         fun funSetupView(view: View)
         fun findUser(userId: String): User
     }

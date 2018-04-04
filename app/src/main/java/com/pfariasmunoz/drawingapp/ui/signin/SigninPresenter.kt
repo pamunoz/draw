@@ -17,6 +17,10 @@ class SigninPresenter @Inject constructor(): SinginContract.Presenter {
         this.uiContext = Injector.get().coroutineUIContext()
     }
 
+    override var currentUser: User
+        get() = findUser(view.userId)
+        set(value) {}
+
     override fun funSetupView(view: SinginContract.View) {
         this.view = view
     }
