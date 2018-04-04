@@ -22,7 +22,7 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
         this.uiContext = Injector.get().coroutineUIContext()
     }
 
-    override var currentUserId: String
+    override var currentUserId: String?
         get() = ""
         set(value) {}
 

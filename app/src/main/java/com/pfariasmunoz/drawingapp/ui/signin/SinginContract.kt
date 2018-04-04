@@ -7,7 +7,7 @@ interface SinginContract {
 
 
     interface View {
-        var userId: String?
+        var userId: String
     }
 
     interface Presenter {

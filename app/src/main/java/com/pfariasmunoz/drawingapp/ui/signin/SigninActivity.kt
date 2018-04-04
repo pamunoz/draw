@@ -25,7 +25,7 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
         val CURRENT_USER_ID = "current_user_id"
     }
 
-    override var userId: String?
+    override var userId: String
         get() = intent.extras.getString("userId")
         set(value) {
 
@@ -41,7 +41,7 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                userId = data?.getStringExtra(CURRENT_USER_ID)
+                userId = data?.getStringExtra(CURRENT_USER_ID) ?: ""
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 userId = ""
