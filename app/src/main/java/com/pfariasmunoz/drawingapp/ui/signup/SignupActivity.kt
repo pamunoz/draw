@@ -43,6 +43,10 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
         btn_register.setOnClickListener({
             if (presenter.checkedPassword()) {
                 presenter.saveUser()
+                val returnIntent = Intent()
+                returnIntent.putExtra(SigninActivity.CURRENT_USER_ID, presenter.currentUserId)
+                setResult(Activity.RESULT_OK, returnIntent)
+                finish()
             } else {
                 showAlertDialog {
                     title = "nothing"
