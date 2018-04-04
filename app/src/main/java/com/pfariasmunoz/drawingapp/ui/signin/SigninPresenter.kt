@@ -22,7 +22,7 @@ class SigninPresenter @Inject constructor() : SinginContract.Presenter {
         get() = ""
         set(value) {}
 
-    override fun funSetupView(view: SinginContract.View) {
+    override fun setupView(view: SinginContract.View) {
         this.view = view
     }
 

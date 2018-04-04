@@ -3,18 +3,18 @@ package com.pfariasmunoz.drawingapp.ui.signin
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
+import android.view.Gravity
 import com.pfariasmunoz.drawingapp.R
-import com.pfariasmunoz.drawingapp.data.source.local.UsersAppDatabase
-import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
 import com.pfariasmunoz.drawingapp.util.launchActivity
 import kotlinx.android.synthetic.main.activity_signin.*
-import kotlinx.coroutines.experimental.async
-import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.customView
+import org.jetbrains.anko.okButton
 
 
 class SigninActivity : AppCompatActivity(), SinginContract.View {
@@ -33,6 +33,8 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
+
+        presenter.setupView(this)
 
         if (presenter.currentUserId.isNotEmpty()) launchActivity<HomeActivity> {
             putExtra(CURRENT_USER_ID, presenter.currentUserId)
@@ -64,11 +66,17 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
     }
 
     override fun showSigninError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        alert {
+            title = "Incorrect user/password combination"
+            okButton { Gravity.CENTER_HORIZONTAL
+
+            }
+
+        }.show()
     }
 
     override fun signin() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        launchActivity<HomeActivity>{ putExtra(CURRENT_USER_ID, presenter.currentUserId)}
     }
 
 }
