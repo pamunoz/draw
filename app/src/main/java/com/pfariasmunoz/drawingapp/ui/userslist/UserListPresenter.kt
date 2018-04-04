@@ -12,7 +12,7 @@ import kotlin.coroutines.experimental.CoroutineContext
 class UserListPresenter @Inject constructor(): UserListContract.Presenter {
 
     lateinit var view: UserListContract.View
-    lateinit var userList: List<User>
+    val userList = ArrayList<User>()
     val usersDataSource : UsersLocalDataSource
     val uiContext: CoroutineContext
 
@@ -30,7 +30,9 @@ class UserListPresenter @Inject constructor(): UserListContract.Presenter {
         val result = usersDataSource.getUsers()
         when(result) {
             is Result.Success -> {
-                userList = result.data
+                for (user in result.data) {
+                    userList.add(user)
+                }
             }
         }
     }
