@@ -33,12 +33,8 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
-
         presenter.setupView(this)
-
-        if (presenter.currentUserId.isNotEmpty()) launchActivity<HomeActivity> {
-            putExtra(CURRENT_USER_ID, presenter.currentUserId)
-        }
+        if (presenter.currentUserId.isNotEmpty()) signin()
         setListeners()
     }
 
