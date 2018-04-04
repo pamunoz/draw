@@ -21,8 +21,8 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
     }
 
     companion object {
-        private val REQUEST_CODE = 1
-        private val CURRENT_USER_ID = "current_user_id"
+        val REQUEST_CODE = 1
+        val CURRENT_USER_ID = "current_user_id"
     }
 
     override var userId: String?

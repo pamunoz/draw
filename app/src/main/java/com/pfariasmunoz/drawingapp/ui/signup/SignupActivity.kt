@@ -1,5 +1,6 @@
 package com.pfariasmunoz.drawingapp.ui.signup
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -35,8 +36,8 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
 
     private fun setListeners() {
         btn_signin.setOnClickListener({
-            val intent = Intent(this, SigninActivity::class.java)
-            startActivity(intent)
+            setResult(Activity.RESULT_CANCELED, Intent())
+            finish()
         })
 
         btn_register.setOnClickListener({

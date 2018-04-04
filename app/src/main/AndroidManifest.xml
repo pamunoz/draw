@@ -19,7 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.signup.SignupActivity">
+        <activity
+            android:name=".ui.signup.SignupActivity"
+            android:label="Sing Up"
+            android:parentActivityName=".ui.signin.SigninActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.signin.SigninActivity"/>
         </activity>
         <activity android:name=".ui.drawing.DrawingActivity">
         </activity>
