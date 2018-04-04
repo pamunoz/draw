@@ -1,5 +1,6 @@
 package com.pfariasmunoz.drawingapp.ui.userslist
 
+import android.util.Log
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
@@ -12,7 +13,7 @@ import kotlin.coroutines.experimental.CoroutineContext
 class UserListPresenter @Inject constructor(): UserListContract.Presenter {
 
     lateinit var view: UserListContract.View
-    val userList = ArrayList<User>()
+    val userNamesList = ArrayList<String>()
     val usersDataSource : UsersLocalDataSource
     val uiContext: CoroutineContext
 
@@ -30,9 +31,11 @@ class UserListPresenter @Inject constructor(): UserListContract.Presenter {
         val result = usersDataSource.getUsers()
         when(result) {
             is Result.Success -> {
+                Log.i("PRESENTER", "${result.data}")
                 for (user in result.data) {
-                    userList.add(user)
+                    userNamesList.add(user.login)
                 }
+                view.setupAdapter()
             }
         }
     }
