@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
 import android.view.Gravity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
@@ -70,6 +71,11 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
 
     override fun signin() {
         launchActivity<HomeActivity>{ putExtra(CURRENT_USER_ID, presenter.currentUserId)}
+    }
+
+    override fun displayUserSignedIn(login: String, password: String) {
+        username_edittext.setText(login)
+        password_edittext.setText(password)
     }
 
 }

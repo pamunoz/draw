@@ -28,7 +28,13 @@ class SigninPresenter @Inject constructor() : SinginContract.Presenter {
 
     override fun findUser(userId: String) = launchSilent(uiContext) {
         val result = usersDataSource.getUserById(userId)
-        currentUserId = (result as? Result.Success)?.data?.id ?: ""
+        when(result) {
+            is Result.Success -> {
+                currentUserId = result.data.id
+                view.displayUserSignedIn(result.data.login, result.data.password)
+            }
+            else -> currentUserId = ""
+        }
     }
 
     override fun checkUser(login: String, password: String) = launchSilent(uiContext) {

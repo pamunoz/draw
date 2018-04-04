@@ -1,7 +1,5 @@
 package com.pfariasmunoz.drawingapp.ui.signin
 
-import com.pfariasmunoz.drawingapp.data.source.model.User
-
 interface SinginContract {
 
 
@@ -9,6 +7,7 @@ interface SinginContract {
     interface View {
         fun showSigninError()
         fun signin()
+        fun displayUserSignedIn(login: String, password: String)
     }
 
     interface Presenter {
