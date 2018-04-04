@@ -10,6 +10,8 @@ import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
 import com.pfariasmunoz.drawingapp.util.positiveButton
 import com.pfariasmunoz.drawingapp.util.showAlertDialog
 import kotlinx.android.synthetic.main.activity_signup.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.okButton
 
 class SignupActivity : AppCompatActivity(), SignupContract.View {
 
@@ -48,12 +50,9 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
                 setResult(Activity.RESULT_OK, returnIntent)
                 finish()
             } else {
-                showAlertDialog {
-                    title = "nothing"
-                    setMessage("Passwords don't match!")
-                    positiveButton("OK") {
-
-                    }
+                alert {
+                    title = "Passwords don't match!"
+                    okButton {  }
                 }
             }
         })

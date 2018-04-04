@@ -13,7 +13,6 @@ import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
 import com.pfariasmunoz.drawingapp.util.launchActivity
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.alert
-import org.jetbrains.anko.customView
 import org.jetbrains.anko.okButton
 
 
@@ -47,9 +46,6 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
                     okButton {  }
                 }
             }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                presenter.currentUserId = ""
-            }
         }
     }
 
@@ -68,10 +64,7 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
     override fun showSigninError() {
         alert {
             title = "Incorrect user/password combination"
-            okButton { Gravity.CENTER_HORIZONTAL
-
-            }
-
+            okButton { Gravity.CENTER_HORIZONTAL }
         }.show()
     }
 

@@ -32,12 +32,13 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
 
     override fun saveUser() = launchSilent(uiContext) {
         val login = view.getUserName()
-        val password = if (checkedPassword()) view.getFirstPassword() else ""
+        val password = view.getFirstPassword()
         val byteArray = ByteArray(10)
         val currentUser = User(login = login, password = password, drawing = byteArray)
         currentUserId = currentUser.id
-        usersDataSource.saveUser(currentUser)
-
+        if (login.isNotEmpty() && password.isNotEmpty()) {
+            usersDataSource.saveUser(currentUser)
+        }
     }
 
     override fun checkedPassword(): Boolean {
