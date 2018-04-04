@@ -13,7 +13,7 @@ interface SinginContract {
     interface Presenter {
         var currentUserId: String
         fun setupView(view: View)
-        fun findUser(userId: String)
+        fun findUser()
         fun checkUser(login: String, password: String)
     }
 }

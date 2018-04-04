@@ -3,9 +3,7 @@ package com.pfariasmunoz.drawingapp.ui.signin
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
-import android.text.Editable
 import android.view.Gravity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
@@ -20,6 +18,8 @@ import org.jetbrains.anko.okButton
 class SigninActivity : AppCompatActivity(), SinginContract.View {
 
     val presenter: SigninPresenter
+    var showSavedUser: Boolean = false
+
 
     init {
         this.presenter = Injector.get().signinPresenter()
@@ -42,13 +42,15 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 presenter.currentUserId = data?.getStringExtra(CURRENT_USER_ID)!!
+                presenter.findUser()
                 alert {
                     title = "User saved"
                     okButton {  }
-                }
+                }.show()
             }
         }
     }
+
 
     private fun setListeners() {
         btn_sign_up.setOnClickListener({
@@ -77,5 +79,6 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
         username_edittext.setText(login)
         password_edittext.setText(password)
     }
+
 
 }

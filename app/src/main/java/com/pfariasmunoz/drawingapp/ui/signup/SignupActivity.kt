@@ -2,13 +2,11 @@ package com.pfariasmunoz.drawingapp.ui.signup
 
 import android.app.Activity
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
-import com.pfariasmunoz.drawingapp.util.positiveButton
-import com.pfariasmunoz.drawingapp.util.showAlertDialog
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
@@ -38,7 +36,6 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
 
     private fun setListeners() {
         btn_signin.setOnClickListener({
-            setResult(Activity.RESULT_CANCELED, Intent())
             finish()
         })
 
