@@ -31,9 +31,8 @@ class UserListPresenter @Inject constructor(): UserListContract.Presenter {
         val result = usersDataSource.getUsers()
         when(result) {
             is Result.Success -> {
-                Log.i("PRESENTER", "${result.data}")
                 for (user in result.data) {
-                    userNamesList.add(user.login)
+                    userNamesList.add("user: ${user.login}, pass: ${user.password}")
                 }
                 view.setupAdapter()
             }
