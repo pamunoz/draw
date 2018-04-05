@@ -32,6 +32,11 @@ class UserListActivity : AppCompatActivity(), UserListContract.View {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.setupView(this)
+    }
+
     override fun showList() {
         presenter.loadUsers()
     }
