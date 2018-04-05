@@ -1,10 +1,7 @@
 package com.pfariasmunoz.drawingapp.ui.drawing
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Point
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
@@ -14,34 +11,35 @@ import android.view.View
 class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
 
     private val drawPaint: Paint
-    private val circlePoints: MutableList<Point>
+    private val path = Path()
 
     init {
-        circlePoints = mutableListOf()
+
         isFocusable = true
         isFocusableInTouchMode = true
         drawPaint = Paint().apply {
             color = Color.BLACK
             isAntiAlias = true
             strokeWidth = 5f
-            style = Paint.Style.FILL
+            style = Paint.Style.STROKE
             strokeJoin = Paint.Join.ROUND
             strokeCap = Paint.Cap.ROUND
         }
     }
 
     override fun onDraw(canvas: Canvas?) {
-        canvas?.apply {
-            circlePoints.forEach {
-                canvas.drawCircle(it.x.toFloat(), it.y.toFloat(), 5f, drawPaint) }
-        }
+        canvas?.drawPath(path, drawPaint)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        val touchX = event?.x
-        val touchY = event?.y
-        circlePoints.add(Point(Math.round(touchX!!), Math.round(touchY!!)))
-        // indicate view should be redrawn
+        val touchX = event?.x ?: 0f
+        val touchY = event?.y ?: 0f
+
+        when(event?.action) {
+            MotionEvent.ACTION_DOWN -> path.moveTo(touchX, touchY)
+            MotionEvent.ACTION_MOVE -> path.lineTo(touchX, touchY)
+        }
+
         postInvalidate()
         return true
     }
