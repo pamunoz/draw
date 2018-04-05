@@ -1,11 +1,14 @@
 package com.pfariasmunoz.drawingapp.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.widget.Toast
 import org.jetbrains.anko.AlertDialogBuilder
 
@@ -15,6 +18,7 @@ fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_
  * Extensions for simpler launching of Activities
  */
 
+@SuppressLint("ObsoleteSdkInt")
 inline fun <reified T : Any> Activity.launchActivity(
         requestCode: Int = -1,
         options: Bundle? = null,
@@ -29,6 +33,7 @@ inline fun <reified T : Any> Activity.launchActivity(
     }
 }
 
+@SuppressLint("ObsoleteSdkInt")
 inline fun <reified T : Any> Context.launchActivity(
         options: Bundle? = null,
         noinline init: Intent.() -> Unit = {}) {
@@ -44,20 +49,17 @@ inline fun <reified T : Any> Context.launchActivity(
 
 inline fun <reified T : Any> newIntent(context: Context): Intent =
         Intent(context, T::class.java)
-
-inline fun Context.showAlertDialog(dialogBuilder: AlertDialog.Builder.() -> Unit) {
-    val builder = AlertDialog.Builder(this)
-    builder.dialogBuilder()
-    builder.create().show()
+// DeviceDimensionsHelper.getDisplayWidth(context) => (display width in pixels)
+val Context.displayWidth: Int
+    get() = this.resources.displayMetrics.widthPixels
+// DeviceDimensionsHelper.getDisplayHeight(context) => (display height in pixels)
+val Context.displayHeight: Int
+    get() = this.resources.displayMetrics.heightPixels
+// DeviceDimensionsHelper.convertDpToPixel(25f, context) => (25dp converted to pixels)
+fun Context.dpToPixels(dp: Float): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.resources.displayMetrics)
 }
-
-fun AlertDialog.Builder.positiveButton(text: String = "OK", handleClick: (which: Int) -> Unit = {})
-{
-    this.setPositiveButton(text, {_, which -> handleClick(which)})
+// DeviceDimensionsHelper.convertPixelsToDp(25f, context) => (25px converted to dp)
+fun Context.pixelsToDp(px: Float): Float {
+    return px / (this.resources.displayMetrics.densityDpi / 160f)
 }
-
-fun AlertDialog.Builder.negativeButton(text: String = "Cancel", handleClick: (which: Int) -> Unit = {})
-{
-    this.setNegativeButton(text, {_, which -> handleClick(which)})
-}
-
