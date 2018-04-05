@@ -1,13 +1,10 @@
 package com.pfariasmunoz.drawingapp.ui.userslist
 
-import android.util.Log
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
-import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
-
 import kotlin.coroutines.experimental.CoroutineContext
 
 class UserListPresenter @Inject constructor(): UserListContract.Presenter {
@@ -32,7 +29,7 @@ class UserListPresenter @Inject constructor(): UserListContract.Presenter {
         when(result) {
             is Result.Success -> {
                 for (user in result.data) {
-                    userNamesList.add("user: ${user.login}, pass: ${user.password}")
+                    userNamesList.add(user.login)
                 }
                 view.setupAdapter()
             }
