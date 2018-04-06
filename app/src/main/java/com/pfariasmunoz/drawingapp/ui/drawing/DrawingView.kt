@@ -91,8 +91,6 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
         invalidate()
     }
 
-    fun getBitmap() = mBitmap
-
     fun clear() {
         mBitmap.eraseColor(Color.GREEN)
         invalidate()
