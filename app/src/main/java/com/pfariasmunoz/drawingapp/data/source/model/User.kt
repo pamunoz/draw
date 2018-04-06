@@ -11,7 +11,7 @@ import java.util.*
  * @param password password of the user
  * @param login login of the user
  */
-@Entity(tableName = "users", indices = arrayOf(Index(value = ["login"], unique = true)))
+@Entity(tableName = "users", indices = [(Index(value = ["login"], unique = true))])
 data class User(
         @PrimaryKey
         @ColumnInfo(name = "_id") var id: String = UUID.randomUUID().toString(),
