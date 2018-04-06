@@ -23,6 +23,10 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawing)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
         presenter.setupView(this)
         presenter.loadUserDrawing()
 

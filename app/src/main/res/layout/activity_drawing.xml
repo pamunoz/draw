@@ -1,27 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.drawing.DrawingActivity">
+    tools:context=".ui.drawing.DrawingActivity"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_clear_drawing"
-        style="@style/button_list"
-        android:text="Clear"/>
-
-    <Button
-        android:id="@+id/btn_save_drawing"
-        android:layout_below="@+id/btn_clear_drawing"
-        android:text="@string/btn_save"
-        style="@style/button_list" />
-
-    <com.pfariasmunoz.drawingapp.ui.drawing.DrawingView
-        android:id="@+id/simpleDrawingView1"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/btn_save_drawing"/>
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btn_clear_drawing"
+                style="@style/button_list"
+                android:text="Clear"/>
+
+            <Button
+                android:id="@+id/btn_save_drawing"
+                android:layout_below="@+id/btn_clear_drawing"
+                android:text="@string/btn_save"
+                style="@style/button_list" />
+
+            <com.pfariasmunoz.drawingapp.ui.drawing.DrawingView
+                android:id="@+id/simpleDrawingView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/btn_save_drawing"/>
+
+        </RelativeLayout>
+
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+</LinearLayout>

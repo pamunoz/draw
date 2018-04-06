@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="GrayBackground" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="GrayBackground" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@color/background</item>
     </style>
 
