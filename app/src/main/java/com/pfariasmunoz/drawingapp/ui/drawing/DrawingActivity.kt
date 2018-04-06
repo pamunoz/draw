@@ -10,15 +10,10 @@ class DrawingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val drawingView = DrawingView(this, null)
         setContentView(R.layout.activity_drawing)
 
-
         btn_save_drawing.setOnClickListener({
-
-
-            Log.i("DrawingActivity", "${drawingView.drawingCache}")
-            //Log.i("DrawingActivity", "${drawingView.mBitmap}")
+            Log.i("DrawingActivity", "${simpleDrawingView1.mBitmap}")
         })
     }
 }
