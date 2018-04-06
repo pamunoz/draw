@@ -13,7 +13,8 @@ class DrawingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_drawing)
 
         btn_save_drawing.setOnClickListener({
-            Log.i("DrawingActivity", "${simpleDrawingView1.mBitmap}")
+            simpleDrawingView1.clear()
+            //Log.i("DrawingActivity", "${simpleDrawingView1.mBitmap}")
         })
     }
 }

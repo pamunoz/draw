@@ -92,7 +92,7 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
     }
 
     fun clear() {
-        mBitmap.eraseColor(Color.GREEN)
+        mBitmap.eraseColor(Color.WHITE)
         invalidate()
         System.gc()
     }
