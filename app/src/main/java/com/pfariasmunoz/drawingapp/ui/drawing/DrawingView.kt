@@ -8,7 +8,7 @@ import android.view.View
 
 
 
-class DrawingView(context: Context, attrs: AttributeSet): View(context, attrs) {
+class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) {
 
     lateinit var mBitmap: Bitmap
     lateinit var mCanvas: Canvas
