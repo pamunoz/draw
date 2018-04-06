@@ -18,6 +18,10 @@ class UserListActivity : AppCompatActivity(), UserListContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_list)
+        setSupportActionBar(user_list_toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
         setupAdapter()
     }
 
