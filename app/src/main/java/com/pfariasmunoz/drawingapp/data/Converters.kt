@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.nio.ByteBuffer
 
-class Converters {
+object Converters {
 
 
     fun convertBitmapToByteArray(bitmap: Bitmap): ByteArray {
@@ -27,14 +27,14 @@ class Converters {
             }
         }
     }
-    @TypeConverter
+    //@TypeConverter
     fun convertBitmapToByteArrayUncompressed(bitmap: Bitmap): ByteArray {
         val bf: ByteBuffer = ByteBuffer.allocate(bitmap.byteCount)
         bitmap.copyPixelsToBuffer(bf)
         bf.rewind()
         return  bf.array()
     }
-    @TypeConverter
+    //@TypeConverter
     fun convertCompressedByteArrayToBitmap(byteArray: ByteArray): Bitmap {
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
     }
