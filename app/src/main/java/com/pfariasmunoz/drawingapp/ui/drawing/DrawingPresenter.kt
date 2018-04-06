@@ -34,4 +34,15 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
         }
     }
 
+    override fun updateUser() = launchSilent(uiContext) {
+        var user: User? = null
+        val result = usersDataSource.getUserById(view.currentUserId)
+        when(result) {
+            is Result.Success -> {
+                user = result.data
+                usersDataSource.updateUser(user)
+            }
+        }
+    }
+
 }

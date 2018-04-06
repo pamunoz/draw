@@ -24,8 +24,7 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
         setContentView(R.layout.activity_drawing)
 
         btn_save_drawing.setOnClickListener({
-            simpleDrawingView1.clear()
-            //Log.i("DrawingActivity", "${simpleDrawingView1.mBitmap}")
+            presenter.updateUser()
         })
     }
 }

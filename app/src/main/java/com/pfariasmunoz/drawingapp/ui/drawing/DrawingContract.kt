@@ -8,5 +8,6 @@ interface DrawingContract {
     interface Presenter {
         fun setupView(view: View)
         fun findUser()
+        fun updateUser()
     }
 }
