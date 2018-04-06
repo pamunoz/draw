@@ -4,6 +4,7 @@ import android.content.Context
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.di.modules.ContextModule
 import com.pfariasmunoz.drawingapp.di.modules.DatabaseModule
+import com.pfariasmunoz.drawingapp.ui.drawing.DrawingPresenter
 import com.pfariasmunoz.drawingapp.ui.signin.SigninPresenter
 import com.pfariasmunoz.drawingapp.ui.signup.SignupPresenter
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListPresenter
@@ -20,6 +21,8 @@ interface AppComponent {
     fun signinPresenter(): SigninPresenter
 
     fun userListPresenter(): UserListPresenter
+
+    fun drawingPresenter(): DrawingPresenter
 
     fun localUsersDataSource(): UsersLocalDataSource
 

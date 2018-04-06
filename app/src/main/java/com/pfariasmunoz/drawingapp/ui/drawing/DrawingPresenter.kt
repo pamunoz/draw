@@ -30,7 +30,7 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
             is Result.Success -> {
                 currentUser = result.data
             }
-            
+
         }
     }
 
