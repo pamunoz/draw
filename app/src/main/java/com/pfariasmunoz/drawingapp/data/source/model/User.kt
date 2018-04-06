@@ -1,9 +1,6 @@
 package com.pfariasmunoz.drawingapp.data.source.model
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 import java.util.*
 
 /**
@@ -14,7 +11,7 @@ import java.util.*
  * @param password password of the user
  * @param login login of the user
  */
-@Entity(tableName = "users")
+@Entity(tableName = "users", indices = arrayOf(Index(value = "login", unique = true)))
 data class User(
         @PrimaryKey
         @ColumnInfo(name = "_id") var id: String = UUID.randomUUID().toString(),
