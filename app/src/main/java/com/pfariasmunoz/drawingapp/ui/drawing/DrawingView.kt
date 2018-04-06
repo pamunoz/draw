@@ -24,7 +24,9 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
 
     init {
         mPath = Path()
-        mBitmapPaint = Paint(Paint.DITHER_FLAG)
+        mBitmapPaint = Paint(Paint.DITHER_FLAG).apply {
+            setBackgroundColor(Color.WHITE)
+        }
         isFocusable = true
         isFocusableInTouchMode = true
         mDrawPaint = Paint().apply {
@@ -97,4 +99,7 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
         System.gc()
     }
 
+    fun setBitmap(bitmap: Bitmap) {
+        mBitmap = bitmap
+    }
 }

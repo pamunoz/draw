@@ -8,7 +8,13 @@
     tools:context=".ui.drawing.DrawingActivity">
 
     <Button
+        android:id="@+id/btn_clear_drawing"
+        style="@style/button_list"
+        android:text="Clear"/>
+
+    <Button
         android:id="@+id/btn_save_drawing"
+        android:layout_below="@+id/btn_clear_drawing"
         android:text="@string/btn_save"
         style="@style/button_list" />
 

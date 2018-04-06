@@ -5,15 +5,19 @@ import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.util.launchSilent
+import com.pfariasmunoz.drawingapp.util.toBitmap
+import com.pfariasmunoz.drawingapp.util.toByteArray
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.async
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
 class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
 
     lateinit var view: DrawingContract.View
+    private val bgContext: CoroutineContext = CommonPool
     val usersDataSource : UsersLocalDataSource
     val uiContext: CoroutineContext
-    private lateinit var currentUser: User
 
     init {
         this.usersDataSource = Injector.get().localUsersDataSource()
@@ -24,25 +28,31 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
         this.view = view
     }
 
-    override fun findUser() = launchSilent(uiContext) {
+    override fun loadUserDrawing() = launchSilent(uiContext) {
         val result = usersDataSource.getUserById(view.currentUserId)
         when(result) {
             is Result.Success -> {
-                currentUser = result.data
+                val currentUser = result.data
+                view.draw(currentUser.drawing!!.toBitmap)
             }
-
         }
     }
 
-    override fun updateUser() = launchSilent(uiContext) {
-        var user: User? = null
+    override fun saveUser() = launchSilent(uiContext) {
+        val task =  async(bgContext) { view.getDrawing() }
+        val bitmapResult = task.await()
+        val bitmap = bitmapResult
         val result = usersDataSource.getUserById(view.currentUserId)
         when(result) {
             is Result.Success -> {
-                user = result.data
+                val user = result.data
+                user.drawing = bitmap.toByteArray
                 usersDataSource.updateUser(user)
             }
         }
     }
+
+
+
 
 }
