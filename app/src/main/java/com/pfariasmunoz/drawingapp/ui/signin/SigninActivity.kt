@@ -18,8 +18,6 @@ import org.jetbrains.anko.okButton
 class SigninActivity : AppCompatActivity(), SinginContract.View {
 
     val presenter: SigninPresenter
-    var showSavedUser: Boolean = false
-
 
     init {
         this.presenter = Injector.get().signinPresenter()

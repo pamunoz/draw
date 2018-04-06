@@ -1,6 +1,8 @@
 package com.pfariasmunoz.drawingapp.ui.drawing
 
+import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
+import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
@@ -11,6 +13,7 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
     lateinit var view: DrawingContract.View
     val usersDataSource : UsersLocalDataSource
     val uiContext: CoroutineContext
+    private lateinit var currentUser: User
 
     init {
         this.usersDataSource = Injector.get().localUsersDataSource()
@@ -22,7 +25,13 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
     }
 
     override fun findUser() = launchSilent(uiContext) {
-        usersDataSource.getUserById(view.currentUserId)
+        val result = usersDataSource.getUserById(view.currentUserId)
+        when(result) {
+            is Result.Success -> {
+                currentUser = result.data
+            }
+            
+        }
     }
 
 }
