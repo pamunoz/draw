@@ -30,7 +30,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.signin.SigninActivity"/>
         </activity>
-        <activity android:name=".ui.drawing.DrawingActivity">
+        <activity
+            android:name=".ui.drawing.DrawingActivity"
+            android:label="Draw"
+            android:parentActivityName=".ui.home.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.home.HomeActivity"/>
         </activity>
         <activity android:name=".ui.userslist.UserListActivity">
         </activity>
