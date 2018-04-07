@@ -14,6 +14,6 @@ interface SinginContract {
         var currentUserId: String
         fun setupView(view: View)
         fun findUser()
-        fun checkUser(login: String, password: String)
+        fun checkUserAndSignIn(login: String, password: String)
     }
 }

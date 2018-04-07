@@ -18,9 +18,11 @@ class SigninPresenter @Inject constructor() : SinginContract.Presenter {
         this.uiContext = Injector.get().coroutineUIContext()
     }
 
-    override var currentUserId: String
+    override var currentUserId: String = ""
         get() = ""
-        set(value) {}
+        set(value) {
+            if (value.isNotEmpty()) field = value
+        }
 
     override fun setupView(view: SinginContract.View) {
         this.view = view
@@ -36,7 +38,7 @@ class SigninPresenter @Inject constructor() : SinginContract.Presenter {
         }
     }
 
-    override fun checkUser(login: String, password: String) = launchSilent(uiContext) {
+    override fun checkUserAndSignIn(login: String, password: String) = launchSilent(uiContext) {
         var memoryLogin = ""
         var memoryPassword = ""
         val result = usersDataSource.getUserByPassword(password)

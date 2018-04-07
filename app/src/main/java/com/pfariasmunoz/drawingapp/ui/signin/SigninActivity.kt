@@ -57,7 +57,7 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
         btn_sign_in.setOnClickListener({
             val login = username_edittext.text.toString()
             val password = password_edittext.text.toString()
-            presenter.checkUser(login, password)
+            presenter.checkUserAndSignIn(login, password)
         })
 
     }
