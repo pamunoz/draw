@@ -1,5 +1,6 @@
 package com.pfariasmunoz.drawingapp.ui.drawing
 
+import android.app.ActionBar
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -23,8 +24,10 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawing)
-        setSupportActionBar(drawing_toolbar)
+        //setSupportActionBar(drawing_toolbar)
         supportActionBar?.apply {
+            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+            setCustomView(R.layout.abs_layout)
             setDisplayHomeAsUpEnabled(true)
         }
         presenter.setupView(this)

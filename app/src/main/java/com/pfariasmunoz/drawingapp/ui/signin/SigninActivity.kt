@@ -78,5 +78,17 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
         password_edittext.setText(password)
     }
 
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.apply {
+            putString(CURRENT_USER_ID, presenter.currentUserId)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        presenter.currentUserId = savedInstanceState?.getString(CURRENT_USER_ID) ?: ""
+    }
+
 
 }
