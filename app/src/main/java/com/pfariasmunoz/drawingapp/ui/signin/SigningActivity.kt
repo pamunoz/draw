@@ -15,9 +15,9 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
 
 
-class SigninActivity : AppCompatActivity(), SinginContract.View {
+class SigningActivity : AppCompatActivity(), SingingContract.View {
 
-    val presenter: SigninPresenter
+    val presenter: SigningPresenter
 
     init {
         this.presenter = Injector.get().signinPresenter()
@@ -59,7 +59,6 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
             val password = password_edittext.text.toString()
             presenter.checkUserAndSignIn(login, password)
         })
-
     }
 
     override fun showSigninError() {

@@ -23,7 +23,7 @@
         <Button
             android:id="@+id/btn_clear_drawing"
             style="@style/button_list"
-            android:text="Clear"/>
+            android:text="@string/btn_clear"/>
 
         <Button
             android:id="@+id/btn_save_drawing"

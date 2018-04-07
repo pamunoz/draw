@@ -17,7 +17,7 @@
             android:name=".ui.home.HomeActivity"
             android:label="Home">
         </activity>
-        <activity android:name=".ui.signin.SigninActivity">
+        <activity android:name=".ui.signin.SigningActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -27,10 +27,10 @@
         <activity
             android:name=".ui.signup.SignupActivity"
             android:label="Sing Up"
-            android:parentActivityName=".ui.signin.SigninActivity">
+            android:parentActivityName=".ui.signin.SigningActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.signin.SigninActivity"/>
+                android:value=".ui.signin.SigningActivity"/>
         </activity>
         <activity
             android:name=".ui.drawing.DrawingActivity"

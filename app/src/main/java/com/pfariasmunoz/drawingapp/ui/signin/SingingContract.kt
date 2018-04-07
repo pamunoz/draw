@@ -1,6 +1,6 @@
 package com.pfariasmunoz.drawingapp.ui.signin
 
-interface SinginContract {
+interface SingingContract {
 
 
 

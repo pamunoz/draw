@@ -1,11 +1,10 @@
 package com.pfariasmunoz.drawingapp.ui.home
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
+import android.support.v7.app.AppCompatActivity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.ui.drawing.DrawingActivity
-import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
+import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListActivity
 import com.pfariasmunoz.drawingapp.util.exist
 import com.pfariasmunoz.drawingapp.util.launchActivity
@@ -22,10 +21,10 @@ class HomeActivity : AppCompatActivity() {
         }
 
         btn_draw.setOnClickListener({
-            val currentUserId = intent.getStringExtra(SigninActivity.CURRENT_USER_ID)
+            val currentUserId = intent.getStringExtra(SigningActivity.CURRENT_USER_ID)
             if (currentUserId.exist()) {
                 launchActivity<DrawingActivity> {
-                    putExtra(SigninActivity.CURRENT_USER_ID, currentUserId)
+                    putExtra(SigningActivity.CURRENT_USER_ID, currentUserId)
                 }
             }
 

@@ -5,10 +5,9 @@ import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.di.modules.ContextModule
 import com.pfariasmunoz.drawingapp.di.modules.DatabaseModule
 import com.pfariasmunoz.drawingapp.ui.drawing.DrawingPresenter
-import com.pfariasmunoz.drawingapp.ui.signin.SigninPresenter
+import com.pfariasmunoz.drawingapp.ui.signin.SigningPresenter
 import com.pfariasmunoz.drawingapp.ui.signup.SignupPresenter
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListPresenter
-import kotlinx.coroutines.experimental.android.UI
 import dagger.Component
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -18,7 +17,7 @@ interface AppComponent {
 
     fun signupPresenter(): SignupPresenter
 
-    fun signinPresenter(): SigninPresenter
+    fun signinPresenter(): SigningPresenter
 
     fun userListPresenter(): UserListPresenter
 

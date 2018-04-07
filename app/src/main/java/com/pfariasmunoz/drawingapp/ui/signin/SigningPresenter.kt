@@ -7,9 +7,9 @@ import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
-class SigninPresenter @Inject constructor() : SinginContract.Presenter {
+class SigningPresenter @Inject constructor() : SingingContract.Presenter {
 
-    lateinit var view: SinginContract.View
+    lateinit var view: SingingContract.View
     val usersDataSource: UsersLocalDataSource
     val uiContext: CoroutineContext
 
@@ -24,7 +24,7 @@ class SigninPresenter @Inject constructor() : SinginContract.Presenter {
             if (value.isNotEmpty()) field = value
         }
 
-    override fun setupView(view: SinginContract.View) {
+    override fun setupView(view: SingingContract.View) {
         this.view = view
     }
 

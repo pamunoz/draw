@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
-import com.pfariasmunoz.drawingapp.ui.signin.SigninActivity
+import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
@@ -43,7 +43,7 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
             if (presenter.checkedPassword()) {
                 presenter.saveUser()
                 val returnIntent = Intent()
-                returnIntent.putExtra(SigninActivity.CURRENT_USER_ID, presenter.currentUserId)
+                returnIntent.putExtra(SigningActivity.CURRENT_USER_ID, presenter.currentUserId)
                 setResult(Activity.RESULT_OK, returnIntent)
                 finish()
             } else {
