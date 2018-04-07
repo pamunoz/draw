@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="my Title"
-        android:textColor="#ffffff"
+        android:textColor="@color/colorSecondaryDark"
         android:id="@+id/mytext"
         android:textSize="18sp" />
 

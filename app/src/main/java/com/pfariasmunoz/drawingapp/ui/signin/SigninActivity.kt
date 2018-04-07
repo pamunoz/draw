@@ -90,5 +90,4 @@ class SigninActivity : AppCompatActivity(), SinginContract.View {
         presenter.currentUserId = savedInstanceState?.getString(CURRENT_USER_ID) ?: ""
     }
 
-
 }
