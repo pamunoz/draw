@@ -3,7 +3,9 @@ package com.pfariasmunoz.drawingapp.ui.signup
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
+import com.pfariasmunoz.drawingapp.util.exist
 import com.pfariasmunoz.drawingapp.util.launchSilent
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -18,9 +20,7 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
         this.uiContext = Injector.get().coroutineUIContext()
     }
 
-    override var currentUserId: String?
-        get() = ""
-        set(value) {}
+    override var currentUserId: String? = ""
 
     override fun setUpView(view: SignupContract.View) {
         this.view = view
@@ -32,7 +32,7 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
         val byteArray = ByteArray(10)
         val currentUser = User(login = login, password = password, drawing = byteArray)
         currentUserId = currentUser.id
-        if (login.isNotEmpty() && password.isNotEmpty()) {
+        if (login.exist()) {
             usersDataSource.saveUser(currentUser)
         }
     }

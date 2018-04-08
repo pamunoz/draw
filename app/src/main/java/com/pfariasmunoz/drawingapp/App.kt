@@ -18,15 +18,11 @@ class App: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (BuildConfig.DEBUG) Timber.plant(DebugTree()) else Timber.plant(ReleaseTree())
         INSTANCE = this
         component = DaggerAppComponent.builder()
                 .contextModule(ContextModule(this))
                 .build()
-        if (!BuildConfig.DEBUG) {
-            Timber.plant(DebugTree())
-        } else {
-            Timber.plant(NotLoggingTree())
-        }
     }
 
 }

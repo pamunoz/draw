@@ -10,6 +10,7 @@ import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
+import timber.log.Timber
 
 class SignupActivity : AppCompatActivity(), SignupContract.View {
 
@@ -40,8 +41,10 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
         })
 
         btn_register.setOnClickListener({
+            Timber.i(presenter.currentUserId)
             if (presenter.checkedPassword()) {
                 presenter.saveUser()
+                Timber.d(presenter.currentUserId)
                 val returnIntent = Intent()
                 returnIntent.putExtra(SigningActivity.CURRENT_USER_ID, presenter.currentUserId)
                 setResult(Activity.RESULT_OK, returnIntent)
