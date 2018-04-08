@@ -41,12 +41,13 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
         val result = usersDataSource.getUserByPassword(password)
         when (result) {
             is Result.Success -> {
+                currentUserId = result.data.id
                 memoryLogin = result.data.login
                 memoryPassword = result.data.password
             }
             else -> view.showSigninError()
         }
-        if (login.exist() && password.exist()) {
+        if (currentUserId.isNotEmpty()) {
             if (memoryLogin.equals(login) && memoryPassword.equals(password)) {
                 view.signin()
             } else {

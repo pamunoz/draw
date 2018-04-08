@@ -52,8 +52,10 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
         btn_register.setOnClickListener({
             if (presenter.checkedPassword()) {
                 presenter.saveUser()
-                preferences.put(CURRENT_USER_ID, presenter.currentUserId)
-                finish()
+                if (presenter.currentUserId!!.isNotEmpty()) {
+                    preferences.put(CURRENT_USER_ID, presenter.currentUserId)
+                    finish()
+                }
             } else {
                 alert {
                     title = "Passwords don't match!:"

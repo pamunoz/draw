@@ -15,5 +15,6 @@ interface SingingContract {
         fun setupView(view: View)
         fun findUser()
         fun checkUserAndSignIn(login: String, password: String)
+
     }
 }

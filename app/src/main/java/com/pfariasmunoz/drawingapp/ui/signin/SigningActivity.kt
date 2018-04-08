@@ -1,18 +1,17 @@
 package com.pfariasmunoz.drawingapp.ui.signin
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import com.pfariasmunoz.drawingapp.R
+import com.pfariasmunoz.drawingapp.data.source.local.UsersAppDatabase
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
 import com.pfariasmunoz.drawingapp.util.CURRENT_USER_ID
-import com.pfariasmunoz.drawingapp.util.isNotNull
 import com.pfariasmunoz.drawingapp.util.launchActivity
 import com.pfariasmunoz.drawingapp.util.preferences
+import com.pfariasmunoz.drawingapp.util.toast
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
@@ -29,7 +28,6 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
         presenter.setupView(this)
-        presenter.currentUserId = preferences.getString(CURRENT_USER_ID, "")
         if (presenter.currentUserId.isNotEmpty()) signin()
         setListeners()
     }
@@ -53,7 +51,7 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
     }
 
     override fun signin() {
-        launchActivity<HomeActivity>{ putExtra(CURRENT_USER_ID, presenter.currentUserId)}
+        launchActivity<HomeActivity>()
     }
 
     override fun displayUserSignedIn(login: String, password: String) {
