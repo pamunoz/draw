@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -62,4 +63,17 @@ fun Context.dpToPixels(dp: Float): Float {
 // DeviceDimensionsHelper.convertPixelsToDp(25f, context) => (25px converted to dp)
 fun Context.pixelsToDp(px: Float): Float {
     return px / (this.resources.displayMetrics.densityDpi / 160f)
+}
+
+val Context.preferences: SharedPreferences
+    get() = this.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+
+fun <T>SharedPreferences.put(key: String, value: T) {
+    when(value) {
+        is String -> this.edit().putString(key, value).apply()
+        is Boolean -> this.edit().putBoolean(key, value).apply()
+        is Float -> this.edit().putFloat(key, value).apply()
+        is Int -> this.edit().putInt(key, value).apply()
+        is Long -> this.edit().putLong(key, value).apply()
+    }
 }

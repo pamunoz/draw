@@ -7,10 +7,14 @@ import android.support.v7.app.AppCompatActivity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
+import com.pfariasmunoz.drawingapp.util.CURRENT_USER_ID
+import com.pfariasmunoz.drawingapp.util.preferences
+import com.pfariasmunoz.drawingapp.util.put
+import com.pfariasmunoz.drawingapp.util.toast
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
-import timber.log.Timber
+
 
 class SignupActivity : AppCompatActivity(), SignupContract.View {
 
@@ -24,6 +28,11 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
         presenter.setUpView(this)
+        val userId = preferences.getString(CURRENT_USER_ID, "")
+        toast("current id: $userId")
+        if (userId.isNotEmpty()) {
+            presenter.currentUserId = userId
+        }
         setListeners()
     }
 
@@ -41,13 +50,9 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
         })
 
         btn_register.setOnClickListener({
-            Timber.i(presenter.currentUserId)
             if (presenter.checkedPassword()) {
                 presenter.saveUser()
-                Timber.d(presenter.currentUserId)
-                val returnIntent = Intent()
-                returnIntent.putExtra(SigningActivity.CURRENT_USER_ID, presenter.currentUserId)
-                setResult(Activity.RESULT_OK, returnIntent)
+                preferences.put(CURRENT_USER_ID, presenter.currentUserId)
                 finish()
             } else {
                 alert {

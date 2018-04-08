@@ -2,11 +2,12 @@ package com.pfariasmunoz.drawingapp.ui.drawing
 
 import android.app.ActionBar
 import android.graphics.Bitmap
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
-import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
+import com.pfariasmunoz.drawingapp.util.CURRENT_USER_ID
+import com.pfariasmunoz.drawingapp.util.preferences
 import kotlinx.android.synthetic.main.activity_drawing.*
 
 class DrawingActivity : AppCompatActivity(), DrawingContract.View {
@@ -19,7 +20,7 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
     }
 
     override val currentUserId: String
-        get() = intent.getStringExtra(SigningActivity.CURRENT_USER_ID)
+        get() = preferences.getString(CURRENT_USER_ID, "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

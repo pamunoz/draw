@@ -1,6 +1,7 @@
 package com.pfariasmunoz.drawingapp.di.modules
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.pfariasmunoz.drawingapp.data.source.local.UsersAppDatabase
 import com.pfariasmunoz.drawingapp.data.source.local.UsersDao
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
@@ -39,5 +40,6 @@ class DatabaseModule {
 
     @Provides
     fun provideUiCoroutineContext(): CoroutineContext = uiContext
+
 
 }

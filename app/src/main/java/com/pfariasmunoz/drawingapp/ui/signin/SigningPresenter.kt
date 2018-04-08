@@ -20,10 +20,6 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
     }
 
     override var currentUserId: String = ""
-        get() = ""
-        set(value) {
-            if (value.isNotEmpty()) field = value
-        }
 
     override fun setupView(view: SingingContract.View) {
         this.view = view

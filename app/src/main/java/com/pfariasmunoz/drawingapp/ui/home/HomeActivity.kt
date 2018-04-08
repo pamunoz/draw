@@ -20,22 +20,11 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
-        val currentUserId = intent.getStringExtra(SigningActivity.CURRENT_USER_ID)
-
         btn_draw.setOnClickListener({
-
-            if (currentUserId.exist()) {
-                toast("Current user id: $currentUserId")
-                launchActivity<DrawingActivity> {
-                    putExtra(SigningActivity.CURRENT_USER_ID, currentUserId)
-                }
-            }
-
+            launchActivity<DrawingActivity>()
         })
         btn_users_list.setOnClickListener({
-            toast("Current user id: $currentUserId")
             launchActivity<UserListActivity>()
         })
-
     }
 }

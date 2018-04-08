@@ -15,7 +15,11 @@
         android:theme="@style/GrayBackground">
         <activity
             android:name=".ui.home.HomeActivity"
-            android:label="Home">
+            android:label="Home"
+            android:parentActivityName=".ui.signin.SigningActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.signin.SigningActivity"/>
         </activity>
         <activity android:name=".ui.signin.SigningActivity">
             <intent-filter>

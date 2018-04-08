@@ -9,8 +9,10 @@ import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
+import com.pfariasmunoz.drawingapp.util.CURRENT_USER_ID
 import com.pfariasmunoz.drawingapp.util.isNotNull
 import com.pfariasmunoz.drawingapp.util.launchActivity
+import com.pfariasmunoz.drawingapp.util.preferences
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
@@ -23,43 +25,18 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
     init {
         this.presenter = Injector.get().signinPresenter()
     }
-
-    companion object {
-        val REQUEST_CODE = 1
-        val CURRENT_USER_ID = "current_user_id"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
         presenter.setupView(this)
+        presenter.currentUserId = preferences.getString(CURRENT_USER_ID, "")
         if (presenter.currentUserId.isNotEmpty()) signin()
         setListeners()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                presenter.currentUserId = data?.getStringExtra(CURRENT_USER_ID)!!
-                var title: String?
-                title = if (presenter.currentUserId.isNotEmpty() && presenter.currentUserId.isNotNull()) {
-                    "User saved, id:${presenter.currentUserId}"
-                } else {
-                    "No user saved"
-                }
-                presenter.findUser()
-                alert {
-                    title = title
-                    okButton {  }
-                }.show()
-            }
-        }
-    }
-
-
     private fun setListeners() {
         btn_sign_up.setOnClickListener({
-            launchActivity<SignupActivity>(REQUEST_CODE)
+            launchActivity<SignupActivity>()
         })
         btn_sign_in.setOnClickListener({
             val login = username_edittext.text.toString()
@@ -83,17 +60,4 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
         username_edittext.setText(login)
         password_edittext.setText(password)
     }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.apply {
-            putString(CURRENT_USER_ID, presenter.currentUserId)
-        }
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        presenter.currentUserId = savedInstanceState?.getString(CURRENT_USER_ID) ?: ""
-    }
-
 }

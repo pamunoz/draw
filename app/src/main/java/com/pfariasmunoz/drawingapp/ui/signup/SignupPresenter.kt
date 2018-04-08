@@ -32,7 +32,7 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
         val byteArray = ByteArray(10)
         val currentUser = User(login = login, password = password, drawing = byteArray)
         currentUserId = currentUser.id
-        if (login.exist()) {
+        if (currentUser.id.exist()) {
             usersDataSource.saveUser(currentUser)
         }
     }
