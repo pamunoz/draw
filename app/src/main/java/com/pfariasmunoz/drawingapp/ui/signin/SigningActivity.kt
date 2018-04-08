@@ -9,6 +9,7 @@ import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
+import com.pfariasmunoz.drawingapp.util.isNotNull
 import com.pfariasmunoz.drawingapp.util.launchActivity
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.alert
@@ -40,9 +41,15 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 presenter.currentUserId = data?.getStringExtra(CURRENT_USER_ID)!!
+                var title: String?
+                title = if (presenter.currentUserId.isNotEmpty() && presenter.currentUserId.isNotNull()) {
+                    "User saved, id:${presenter.currentUserId}"
+                } else {
+                    "No user saved"
+                }
                 presenter.findUser()
                 alert {
-                    title = "User saved"
+                    title = title
                     okButton {  }
                 }.show()
             }

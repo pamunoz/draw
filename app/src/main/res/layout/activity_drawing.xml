@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         app:titleTextColor="@color/colorSecondaryDark"
         android:background="?attr/colorPrimary">
+
+        <include layout="@layout/abs_layout"/>
     </android.support.v7.widget.Toolbar>
 
     <!-- Layout for content is here. This can be a RelativeLayout  -->

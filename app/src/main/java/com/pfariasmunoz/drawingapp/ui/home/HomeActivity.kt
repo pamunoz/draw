@@ -8,6 +8,7 @@ import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListActivity
 import com.pfariasmunoz.drawingapp.util.exist
 import com.pfariasmunoz.drawingapp.util.launchActivity
+import com.pfariasmunoz.drawingapp.util.toast
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -19,10 +20,12 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }
+        val currentUserId = intent.getStringExtra(SigningActivity.CURRENT_USER_ID)
 
         btn_draw.setOnClickListener({
-            val currentUserId = intent.getStringExtra(SigningActivity.CURRENT_USER_ID)
+
             if (currentUserId.exist()) {
+                toast("Current user id: $currentUserId")
                 launchActivity<DrawingActivity> {
                     putExtra(SigningActivity.CURRENT_USER_ID, currentUserId)
                 }
@@ -30,6 +33,7 @@ class HomeActivity : AppCompatActivity() {
 
         })
         btn_users_list.setOnClickListener({
+            toast("Current user id: $currentUserId")
             launchActivity<UserListActivity>()
         })
 

@@ -1,6 +1,9 @@
 package com.pfariasmunoz.drawingapp.util
 
-fun String?.exist(): Boolean {
-    return (this != null || this != "")
+fun <T: String?> T?.exist(): Boolean {
+    return (this.isNotNull() && this!!.length > 0)
 }
 
+fun Any?.isNotNull(): Boolean {
+    return this != null
+}

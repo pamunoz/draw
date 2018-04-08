@@ -48,7 +48,7 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
                 finish()
             } else {
                 alert {
-                    title = "Passwords don't match!"
+                    title = "Passwords don't match!:"
                     okButton {  }
                 }
             }

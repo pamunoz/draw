@@ -3,6 +3,7 @@ package com.pfariasmunoz.drawingapp.ui.signin
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.di.Injector
+import com.pfariasmunoz.drawingapp.util.exist
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
@@ -49,7 +50,7 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
             }
             else -> view.showSigninError()
         }
-        if (login.isNotEmpty() && password.isNotEmpty()) {
+        if (login.exist() && password.exist()) {
             if (memoryLogin.equals(login) && memoryPassword.equals(password)) {
                 view.signin()
             } else {
