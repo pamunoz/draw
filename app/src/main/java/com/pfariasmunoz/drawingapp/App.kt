@@ -4,6 +4,7 @@ import android.app.Application
 import com.pfariasmunoz.drawingapp.di.AppComponent
 import com.pfariasmunoz.drawingapp.di.DaggerAppComponent
 import com.pfariasmunoz.drawingapp.di.modules.ContextModule
+import timber.log.Timber
 
 class App: Application() {
     companion object {
@@ -20,5 +21,7 @@ class App: Application() {
         component = DaggerAppComponent.builder()
                 .contextModule(ContextModule(this))
                 .build()
+        if (!BuildConfig.DEBUG) Timber.plant(NotLoggingTree())
     }
+
 }

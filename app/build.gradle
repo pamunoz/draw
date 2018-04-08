@@ -60,6 +60,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
+    // Timber
+    implementation "com.jakewharton.timber:timber:$versions.timber"
+
     // Anko
     implementation "org.jetbrains.anko:anko-commons:$versions.anko"
 
