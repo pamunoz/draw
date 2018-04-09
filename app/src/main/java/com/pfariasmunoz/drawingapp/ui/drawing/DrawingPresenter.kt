@@ -48,14 +48,10 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
     }
 
     override fun saveUser() = launchSilent(uiContext) {
-        val task =  async(bgContext) { view.getDrawing() }
-        val bitmapResult = task.await()
-        val bitmap = bitmapResult
         val result = usersDataSource.getUserById(view.currentUserId)
         when(result) {
             is Result.Success -> {
                 val user = result.data
-                user.drawing = bitmap.toByteArray
                 usersDataSource.updateUser(user)
             }
         }

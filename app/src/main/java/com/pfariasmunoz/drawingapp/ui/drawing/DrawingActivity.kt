@@ -1,6 +1,7 @@
 package com.pfariasmunoz.drawingapp.ui.drawing
 
 import android.app.ActionBar
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +18,10 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
 
     init {
         presenter = Injector.get().drawingPresenter()
+    }
+
+    companion object {
+        private const val RQS_IMAGE1 = 1
     }
 
     override val currentUserId: String
@@ -37,22 +42,21 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
         }
 
         btn_save_drawing.setOnClickListener({
-            saveUserDrawing()
+            if (simpleDrawingView1.mBitmap != null) {
+                presenter.saveBitmap(simpleDrawingView1.mBitmap)
+            }
         })
         btn_clear_drawing.setOnClickListener({
             simpleDrawingView1.clear()
         })
     }
 
-    override fun getDrawing() = simpleDrawingView1.mBitmap
-
     override fun draw(bitmap: Bitmap) {
         simpleDrawingView1.mBitmap = bitmap
     }
 
-    override fun saveUserDrawing() {
-        simpleDrawingView1.setBitmap(getDrawing())
-        presenter.saveUser()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
 }
