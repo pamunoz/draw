@@ -1,6 +1,5 @@
 package com.pfariasmunoz.drawingapp.ui.drawing
 
-import android.app.ActionBar
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -44,9 +43,9 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
         supportActionBar?.apply {
             //setDisplayHomeAsUpEnabled(true)
             val title = findViewById<TextView>(R.id.title_toolbar)
-            title?.text = "Draw"
+            title?.text = resources.getString(R.string.draw_value)
             val button = findViewById<Button>(R.id.btn_toolbar)
-            button?.text = "Home"
+            button?.text = resources.getString(R.string.home_value)
             button?.setOnClickListener({
                 launchActivity<HomeActivity>()
             })

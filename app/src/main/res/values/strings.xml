@@ -28,4 +28,9 @@
     <string name="error_sign_up">Passwords don\'t match!:</string>
     <string name="error_sign_in">Incorrect user/password\\n combination</string>
     <string name="success_sign_in">User Saved!</string>
+
+    <string name="draw_value">Draw</string>
+    <string name="toolbar_button_home">Logout</string>
+    <string name="home_value">Home</string>
+    <string name="toolbar_title_user_list">Registered Users</string>
 </resources>

@@ -26,9 +26,9 @@ class UserListActivity : AppCompatActivity(), UserListContract.View {
         supportActionBar?.apply {
             //setDisplayHomeAsUpEnabled(true)
             val title = findViewById<TextView>(R.id.title_toolbar)
-            title?.text = "Registered Users"
+            title?.text = resources.getString(R.string.toolbar_title_user_list)
             val button = findViewById<Button>(R.id.btn_toolbar)
-            button?.text = "Home"
+            button?.text = resources.getString(R.string.home_value)
             button?.setOnClickListener({
                 launchActivity<HomeActivity>()
             })
