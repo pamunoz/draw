@@ -52,7 +52,7 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
     }
 
     override fun showSigninError() {
-        okDialog("Incorrect user/password\n combination")
+        okDialog(resources.getString(R.string.error_sign_in))
     }
 
     override fun signin() {
@@ -76,6 +76,6 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
     }
 
     override fun showSigninSuccess() {
-        okDialog("User Saved")
+        okDialog(resources.getString(R.string.success_sign_in))
     }
 }

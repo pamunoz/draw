@@ -24,4 +24,8 @@
     <string name="btn_clear">Clear</string>
     <string name="btn_ok">Ok</string>
     <string name="btn_load">Load</string>
+
+    <string name="error_sign_up">Passwords don\'t match!:</string>
+    <string name="error_sign_in">Incorrect user/password\\n combination</string>
+    <string name="success_sign_in">User Saved!</string>
 </resources>

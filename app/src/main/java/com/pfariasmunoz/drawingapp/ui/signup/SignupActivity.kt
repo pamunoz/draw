@@ -53,6 +53,6 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
     }
 
     override fun showErronPassowdsDontMantch() {
-        okDialog("Passwords don't match!:")
+        okDialog(resources.getString(R.string.error_sign_up))
     }
 }

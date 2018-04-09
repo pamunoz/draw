@@ -23,7 +23,6 @@ import kotlin.coroutines.experimental.CoroutineContext
 class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
 
     lateinit var view: DrawingContract.View
-    private val bgContext: CoroutineContext = CommonPool
     val usersDataSource : UsersLocalDataSource
     val uiContext: CoroutineContext
 
