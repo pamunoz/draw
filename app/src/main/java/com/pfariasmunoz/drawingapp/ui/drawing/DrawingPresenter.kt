@@ -4,6 +4,7 @@ import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
+import com.pfariasmunoz.drawingapp.util.isNotNull
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import com.pfariasmunoz.drawingapp.util.toBitmap
 import com.pfariasmunoz.drawingapp.util.toByteArray
@@ -33,7 +34,8 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
         when(result) {
             is Result.Success -> {
                 val currentUser = result.data
-                view.draw(currentUser.drawing!!.toBitmap)
+                val currentDrawing = currentUser.drawing?.toBitmap
+                //if (currentDrawing.isNotNull()) view.draw(currentDrawing!!)
             }
         }
     }

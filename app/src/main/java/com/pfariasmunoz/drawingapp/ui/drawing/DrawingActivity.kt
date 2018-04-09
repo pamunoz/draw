@@ -31,8 +31,10 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
             setCustomView(R.layout.abs_layout)
             setDisplayHomeAsUpEnabled(true)
         }
-        presenter.setupView(this)
-        presenter.loadUserDrawing()
+        with(presenter) {
+            setupView(this@DrawingActivity)
+            loadUserDrawing()
+        }
 
         btn_save_drawing.setOnClickListener({
             saveUserDrawing()

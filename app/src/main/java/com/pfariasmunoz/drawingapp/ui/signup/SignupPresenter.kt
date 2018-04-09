@@ -4,6 +4,7 @@ import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.util.exist
+import com.pfariasmunoz.drawingapp.util.isNotNull
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import timber.log.Timber
 import javax.inject.Inject
@@ -20,25 +21,29 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
         this.uiContext = Injector.get().coroutineUIContext()
     }
 
-    override var currentUserId: String? = ""
+    override var currentUser: User? = null
 
-    override fun setUpView(view: SignupContract.View) {
+    override fun setupView(view: SignupContract.View) {
         this.view = view
     }
 
-    override fun saveUser() = launchSilent(uiContext) {
-        val login = view.getUserName()
-        val password = view.getFirstPassword()
-        val byteArray = ByteArray(10)
-        val currentUser = User(login = login, password = password, drawing = byteArray)
-        currentUserId = currentUser.id
-        if (currentUser.id.exist()) {
-            usersDataSource.saveUser(currentUser)
+    override fun saveUser(login: String, password: String, confirmPassword: String) = launchSilent(uiContext) {
+        if (checkedPasswords(password, confirmPassword)) {
+            val byteArray = ByteArray(10)
+            currentUser = User(login = login, password = password, drawing = byteArray)
+            if (currentUser.isNotNull()) {
+                usersDataSource.saveUser(currentUser!!)
+                if (currentUser?.id!!.isNotBlank()) view.registerUser()
+            }
+
+        } else {
+            view.showErronPassowdsDontMantch()
         }
+
     }
 
-    override fun checkedPassword(): Boolean {
-        return  (view.getFirstPassword().equals(view.getSecondPassword()))
+    private fun checkedPasswords(firstPassWord: String, secondPassword: String): Boolean {
+        return firstPassWord == secondPassword
     }
 
 }

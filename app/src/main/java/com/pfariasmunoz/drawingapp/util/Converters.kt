@@ -8,18 +8,6 @@ import java.io.IOException
 import java.nio.ByteBuffer
 
 
-//@TypeConverter
-fun convertBitmapToByteArrayUncompressed(bitmap: Bitmap): ByteArray {
-    val bf: ByteBuffer = ByteBuffer.allocate(bitmap.byteCount)
-    bitmap.copyPixelsToBuffer(bf)
-    bf.rewind()
-    return  bf.array()
-}
-//@TypeConverter
-fun convertCompressedByteArrayToBitmap(byteArray: ByteArray): Bitmap {
-    return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-}
-
 val Bitmap.toByteArray : ByteArray
     get(){
     var os: ByteArrayOutputStream? = null
