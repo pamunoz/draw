@@ -9,10 +9,12 @@ import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.util.CURRENT_USER_ID
 import com.pfariasmunoz.drawingapp.util.preferences
+import kotlinx.android.synthetic.main.activity_draw.*
 import kotlinx.android.synthetic.main.activity_drawing.*
 import java.io.FileNotFoundException
 
@@ -45,23 +47,8 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
         }
         with(presenter) {
             setupView(this@DrawingActivity)
-            loadUserDrawing()
         }
-
-        btn_load_drawing.setOnClickListener({
-            val intent = Intent(Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, RQS_IMAGE1)
-        })
-
-        btn_save_drawing.setOnClickListener({
-            if (simpleDrawingView1.mBitmap != null) {
-                presenter.saveBitmap(simpleDrawingView1.mBitmap)
-            }
-        })
-        btn_clear_drawing.setOnClickListener({
-            simpleDrawingView1.clear()
-        })
+        setupListeners()
     }
 
     override fun draw(bitmap: Bitmap) {
@@ -95,7 +82,6 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
                             drawBitmap(tempBitmap, 0f, 0f, null)
                         }
 
-                        simpleDrawingView1.setBitmap(simpleDrawingView1.mBitmap)
                     } catch (e: FileNotFoundException) {
                         e.printStackTrace()
                     }
@@ -103,6 +89,46 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
             }
         }
 
+    }
+
+    private fun setupListeners() {
+        btn_load_drawing.setOnClickListener({
+            val intent = Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, RQS_IMAGE1)
+        })
+
+        btn_save_drawing.setOnClickListener({
+            if (simpleDrawingView1.mBitmap != null) {
+                presenter.saveBitmap(simpleDrawingView1.mBitmap)
+            }
+        })
+        btn_clear_drawing.setOnClickListener({
+            simpleDrawingView1.clear()
+        })
+    }
+
+    /*
+Project position on ImageView to position on Bitmap draw on it
+ */
+
+    private fun drawOnProjectedBitMap(startX: Float, startY: Float, stopX: Float, stopY: Float) {
+        if (stopX < 0 || stopY < 0 || stopX > simpleDrawingView1.width || stopY > simpleDrawingView1.height) {
+            //outside ImageView
+            return
+        } else {
+
+            val ratioWidth = simpleDrawingView1.mBitmap!!.width.toFloat() / simpleDrawingView1.width.toFloat()
+            val ratioHeight = simpleDrawingView1.mBitmap.height.toFloat() / simpleDrawingView1.height.toFloat()
+
+            simpleDrawingView1.mCanvas.drawLine(
+                    startX * ratioWidth,
+                    startY * ratioHeight,
+                    stopX * ratioWidth,
+                    stopY * ratioHeight,
+                    simpleDrawingView1.mBitmapPaint)
+            result.invalidate()
+        }
     }
 
 }

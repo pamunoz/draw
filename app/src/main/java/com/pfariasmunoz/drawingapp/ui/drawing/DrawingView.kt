@@ -13,7 +13,7 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
     lateinit var mBitmap: Bitmap
     lateinit var mCanvas: Canvas
     private val mPath: Path
-    private val mBitmapPaint: Paint
+    val mBitmapPaint: Paint
     private val mDrawPaint: Paint
     private var mXtouch = 0f
     private var mYtouch = 0f
@@ -99,11 +99,5 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
         System.gc()
     }
 
-    fun setBitmap(bitmap: Bitmap) {
-        mBitmap = bitmap
-    }
 
-    fun saveBitmap() {
-
-    }
 }
