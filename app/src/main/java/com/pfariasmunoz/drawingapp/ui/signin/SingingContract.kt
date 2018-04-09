@@ -5,6 +5,7 @@ interface SingingContract {
 
 
     interface View {
+        fun setCurrentUser(id: String)
         fun showSigninError()
         fun signin()
         fun displayUserSignedIn(login: String, password: String)
@@ -13,8 +14,6 @@ interface SingingContract {
     interface Presenter {
         var currentUserId: String
         fun setupView(view: View)
-        fun findUser()
         fun checkUserAndSignIn(login: String, password: String)
-
     }
 }

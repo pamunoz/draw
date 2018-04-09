@@ -8,10 +8,7 @@ import com.pfariasmunoz.drawingapp.data.source.local.UsersAppDatabase
 import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.ui.signup.SignupActivity
-import com.pfariasmunoz.drawingapp.util.CURRENT_USER_ID
-import com.pfariasmunoz.drawingapp.util.launchActivity
-import com.pfariasmunoz.drawingapp.util.preferences
-import com.pfariasmunoz.drawingapp.util.toast
+import com.pfariasmunoz.drawingapp.util.*
 import kotlinx.android.synthetic.main.activity_signin.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.okButton
@@ -60,5 +57,9 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
     override fun displayUserSignedIn(login: String, password: String) {
         username_edittext.setText(login)
         password_edittext.setText(password)
+    }
+
+    override fun setCurrentUser(id: String) {
+        preferences.put(CURRENT_USER_ID, "")
     }
 }

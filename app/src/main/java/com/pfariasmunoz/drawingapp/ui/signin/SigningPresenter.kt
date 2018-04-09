@@ -25,35 +25,27 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
         this.view = view
     }
 
-    override fun findUser() = launchSilent(uiContext) {
-        val result = usersDataSource.getUserById(currentUserId)
-        when(result) {
-            is Result.Success -> {
-                currentUserId = result.data.id
-                view.displayUserSignedIn(result.data.login, result.data.password)
-            }
-        }
-    }
-
+    /**
+     * This function cannot e reached if the [currentUserId] is empty.
+     * So a user is searched in the database that correspond with the data provided.
+     * @param login the login for the user trying to sign in
+     * @param password the password for the user trying to sign in
+     */
     override fun checkUserAndSignIn(login: String, password: String) = launchSilent(uiContext) {
-        var memoryLogin = ""
-        var memoryPassword = ""
         val result = usersDataSource.getUserByPassword(password)
         when (result) {
             is Result.Success -> {
-                currentUserId = result.data.id
-                memoryLogin = result.data.login
-                memoryPassword = result.data.password
+                if (result.data.login == login && result.data.password == password) {
+                    currentUserId = result.data.id
+                    view.apply {
+                        setCurrentUser(currentUserId)
+                        signin()
+                    }
+                } else {
+                    view.showSigninError()
+                }
             }
             else -> view.showSigninError()
         }
-        if (currentUserId.isNotEmpty()) {
-            if (memoryLogin.equals(login) && memoryPassword.equals(password)) {
-                view.signin()
-            } else {
-                view.showSigninError()
-            }
-        }
-
     }
 }
