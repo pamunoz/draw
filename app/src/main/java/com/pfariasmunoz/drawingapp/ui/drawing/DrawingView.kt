@@ -102,4 +102,8 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
     fun setBitmap(bitmap: Bitmap) {
         mBitmap = bitmap
     }
+
+    fun saveBitmap() {
+
+    }
 }

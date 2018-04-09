@@ -33,8 +33,8 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
         val result = usersDataSource.getUserById(view.currentUserId)
         when(result) {
             is Result.Success -> {
-                val currentUser = result.data
-                val currentDrawing = currentUser.drawing?.toBitmap
+                //val currentUser = result.data
+                //val currentDrawing = currentUser.drawing?.toBitmap
                 //if (currentDrawing.isNotNull()) view.draw(currentDrawing!!)
             }
         }

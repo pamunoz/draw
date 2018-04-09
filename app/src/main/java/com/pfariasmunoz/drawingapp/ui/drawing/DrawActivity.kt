@@ -94,7 +94,7 @@ class DrawActivity : AppCompatActivity(){
     Project position on ImageView to position on Bitmap draw on it
      */
 
-    private fun drawOnProjectedBitMap(view: ImageView, bm: Bitmap?,
+    private fun drawOnProjectedBitMap(view: View, bm: Bitmap?,
                                       startX: Float, startY: Float, stopX: Float, stopY: Float) {
         if (stopX < 0 || stopY < 0 || stopX > view.width || stopY > view.height) {
             //outside ImageView
