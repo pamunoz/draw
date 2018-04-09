@@ -3,6 +3,7 @@ package com.pfariasmunoz.drawingapp.util
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
@@ -10,7 +11,10 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import android.view.LayoutInflater
+import android.widget.TextView
 import android.widget.Toast
+import com.pfariasmunoz.drawingapp.R
 import org.jetbrains.anko.AlertDialogBuilder
 
 fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT ).show()
@@ -76,4 +80,20 @@ fun <T>SharedPreferences.put(key: String, value: T) {
         is Int -> this.edit().putInt(key, value).apply()
         is Long -> this.edit().putLong(key, value).apply()
     }
+}
+
+fun Context.okDialog(
+        title: String? = null) {
+    val dialogBuilder = AlertDialog.Builder(this)
+    val inflater: LayoutInflater = LayoutInflater.from(this)
+    val dialogView = inflater.inflate(R.layout.dialog_layout, null)
+    val titleView = dialogView.findViewById<TextView>(R.id.dialog_title)
+    val buttonView = dialogView.findViewById<TextView>(R.id.btn_dialog)
+    titleView.text = title
+    dialogBuilder.setView(dialogView)
+    val dialog = dialogBuilder.create()
+    buttonView.setOnClickListener({
+        dialog.cancel()
+    })
+    dialog.show()
 }
