@@ -40,9 +40,9 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
         when (result) {
             is Result.Success -> {
                 if (result.data.login == login && result.data.password == password) {
-                    currentUserId = result.data.id
                     view.apply {
-                        setCurrentUser(currentUserId)
+                        currentUserId = result.data.id
+                        view.setCurrentUser(currentUserId)
                         signin()
                     }
                 } else {

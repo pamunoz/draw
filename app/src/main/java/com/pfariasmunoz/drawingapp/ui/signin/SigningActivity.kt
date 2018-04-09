@@ -43,6 +43,7 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
             launchActivity<SignupActivity>(REQUEST_CODE)
         })
         btn_sign_in.setOnClickListener({
+            toast("User id = ${presenter.currentUserId}")
             if (preferences.getString(CURRENT_USER_ID, "").isEmpty()) {
                 val login = username_edittext.text.toString()
                 val password = password_edittext.text.toString()
