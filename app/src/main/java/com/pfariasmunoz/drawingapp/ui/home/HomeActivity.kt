@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.data.source.local.UsersAppDatabase
+import com.pfariasmunoz.drawingapp.ui.drawing.DrawActivity
 import com.pfariasmunoz.drawingapp.ui.drawing.DrawingActivity
 import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListActivity
@@ -24,7 +25,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         btn_draw.setOnClickListener({
-            launchActivity<DrawingActivity>()
+            launchActivity<DrawActivity>()
+            //launchActivity<DrawingActivity>()
         })
         btn_users_list.setOnClickListener({
             launchActivity<UserListActivity>()

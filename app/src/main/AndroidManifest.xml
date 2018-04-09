@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.pfariasmunoz.drawingapp">
+    package="com.pfariasmunoz.drawingapp">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -15,8 +15,9 @@
         android:theme="@style/GrayBackground">
         <activity android:name=".ui.signin.SigningActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -25,7 +26,7 @@
             android:parentActivityName=".ui.signin.SigningActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.signin.SigningActivity"/>
+                android:value=".ui.signin.SigningActivity" />
         </activity>
         <activity
             android:name=".ui.signup.SignupActivity"
@@ -33,7 +34,7 @@
             android:parentActivityName=".ui.signin.SigningActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.signin.SigningActivity"/>
+                android:value=".ui.signin.SigningActivity" />
         </activity>
         <activity
             android:name=".ui.drawing.DrawingActivity"
@@ -41,7 +42,7 @@
             android:parentActivityName=".ui.home.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.HomeActivity"/>
+                android:value=".ui.home.HomeActivity" />
         </activity>
         <activity
             android:name=".ui.userslist.UserListActivity"
@@ -49,8 +50,9 @@
             android:parentActivityName=".ui.home.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.home.HomeActivity"/>
+                android:value=".ui.home.HomeActivity" />
         </activity>
+        <activity android:name=".ui.drawing.DrawActivity"></activity>
     </application>
 
 </manifest>
