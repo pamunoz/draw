@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import com.pfariasmunoz.drawingapp.data.source.model.User
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class], version = 2, exportSchema = false)
 abstract class UsersAppDatabase : RoomDatabase() {
 
     abstract fun usersDao(): UsersDao

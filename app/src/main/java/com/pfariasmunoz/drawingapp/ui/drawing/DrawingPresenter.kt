@@ -39,7 +39,7 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
 
     override fun saveBitmap(bitmap: Bitmap) {
         val file = Environment.getExternalStorageDirectory()
-        val newFile = File(file, "drawing.jpg")
+        val newFile = File(file, "${view.currentUserId}.jpg")
 
         try {
             val fileOutputStream = FileOutputStream(newFile)

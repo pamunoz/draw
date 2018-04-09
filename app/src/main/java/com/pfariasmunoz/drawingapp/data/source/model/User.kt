@@ -1,6 +1,7 @@
 package com.pfariasmunoz.drawingapp.data.source.model
 
 import android.arch.persistence.room.*
+import android.graphics.Bitmap
 import java.util.*
 
 /**
@@ -15,25 +16,6 @@ import java.util.*
 data class User(
         @PrimaryKey
         @ColumnInfo(name = "_id") var id: String = UUID.randomUUID().toString(),
-        @ColumnInfo(name = "drawing", typeAffinity = ColumnInfo.BLOB) var drawing: ByteArray?,
         @ColumnInfo(name = "password") var password: String,
-        @ColumnInfo(name = "login") var login: String) {
-
-        override fun equals(other: Any?): Boolean {
-                if (this === other) return true
-                if (javaClass != other?.javaClass) return false
-
-                other as User
-
-                if (!Arrays.equals(drawing, other.drawing)) return false
-
-                return true
-        }
-
-        override fun hashCode(): Int {
-                return drawing?.let { Arrays.hashCode(it) } ?: 0
-        }
-
-
-}
+        @ColumnInfo(name = "login") var login: String)
 

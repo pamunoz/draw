@@ -29,8 +29,7 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
 
     override fun saveUser(login: String, password: String, confirmPassword: String) = launchSilent(uiContext) {
         if (checkedPasswords(password, confirmPassword)) {
-            val byteArray = ByteArray(10)
-            currentUser = User(login = login, password = password, drawing = byteArray)
+            currentUser = User(login = login, password = password)
             if (currentUser.isNotNull()) {
                 usersDataSource.saveUser(currentUser!!)
                 if (currentUser?.id!!.isNotBlank()) view.registerUser()
