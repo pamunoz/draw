@@ -35,11 +35,9 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
                 usersDataSource.saveUser(currentUser!!)
                 if (currentUser?.id!!.isNotBlank()) view.registerUser()
             }
-
         } else {
             view.showErronPassowdsDontMantch()
         }
-
     }
 
     private fun checkedPasswords(firstPassWord: String, secondPassword: String): Boolean {
