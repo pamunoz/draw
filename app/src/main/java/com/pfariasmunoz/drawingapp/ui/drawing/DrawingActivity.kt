@@ -9,9 +9,13 @@ import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Button
+import android.widget.TextView
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.di.Injector
+import com.pfariasmunoz.drawingapp.ui.home.HomeActivity
 import com.pfariasmunoz.drawingapp.util.CURRENT_USER_ID
+import com.pfariasmunoz.drawingapp.util.launchActivity
 import com.pfariasmunoz.drawingapp.util.preferences
 import kotlinx.android.synthetic.main.activity_drawing.*
 import java.io.FileNotFoundException
@@ -36,11 +40,16 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drawing)
-        //setSupportActionBar(drawing_toolbar)
+        setSupportActionBar(drawing_toolbar)
         supportActionBar?.apply {
-            displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
-            setCustomView(R.layout.abs_layout)
-            setDisplayHomeAsUpEnabled(true)
+            //setDisplayHomeAsUpEnabled(true)
+            val title = findViewById<TextView>(R.id.title_toolbar)
+            title?.text = "Draw"
+            val button = findViewById<Button>(R.id.btn_toolbar)
+            button?.text = "Home"
+            button?.setOnClickListener({
+                launchActivity<HomeActivity>()
+            })
         }
         with(presenter) {
             setupView(this@DrawingActivity)

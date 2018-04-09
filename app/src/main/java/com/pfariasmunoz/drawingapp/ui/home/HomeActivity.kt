@@ -3,8 +3,11 @@ package com.pfariasmunoz.drawingapp.ui.home
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.TextView
 import com.pfariasmunoz.drawingapp.R
 import com.pfariasmunoz.drawingapp.ui.drawing.DrawingActivity
+import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListActivity
 import com.pfariasmunoz.drawingapp.util.*
 import kotlinx.android.synthetic.main.activity_home.*
@@ -16,7 +19,15 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setSupportActionBar(home_toolbar)
         supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
+            //setDisplayHomeAsUpEnabled(true)
+            val title = findViewById<TextView>(R.id.title_toolbar)
+            title?.text = "Home"
+            val button = findViewById<Button>(R.id.btn_toolbar)
+            button?.text = "Logout"
+            button?.setOnClickListener({
+                preferences.put(CURRENT_USER_ID, "")
+                launchActivity<SigningActivity>()
+            })
         }
 
         btn_draw.setOnClickListener({
