@@ -15,6 +15,6 @@ interface DrawingContract {
         fun setupView(view: View)
         fun loadUserDrawing()
         fun saveUser()
-
+        fun saveBitmap(bitmap: Bitmap)
     }
 }
