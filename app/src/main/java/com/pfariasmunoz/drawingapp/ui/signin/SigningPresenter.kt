@@ -39,7 +39,7 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
         val result = usersDataSource.getUserByPassword(password)
         when (result) {
             is Result.Success -> {
-                if (result.data.login == login && result.data.password == password) {
+                if (result.data.login.equals(login) && result.data.password.equals(password)) {
                     view.apply {
                         currentUserId = result.data.id
                         view.setCurrentUser(currentUserId)

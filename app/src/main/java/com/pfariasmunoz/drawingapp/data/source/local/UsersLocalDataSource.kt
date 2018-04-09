@@ -39,9 +39,14 @@ class UsersLocalDataSource private constructor(
         else Result.Error(LocalDataNotFoundException())
     }
 
-    override suspend fun saveUser(user: User) =
-            withContext(appExecutors.ioContext){
-        usersDao.insertUser(user)
+    override suspend fun saveUser(user: User) = withContext(appExecutors.ioContext) {
+        when(user) {
+            is User -> {
+                usersDao.insertUser(user)
+                Result.Success(user.id)
+            }
+            else -> Result.Error(LocalDataNotFoundException())
+        }
     }
 
     override suspend fun deleteAllUsers() =

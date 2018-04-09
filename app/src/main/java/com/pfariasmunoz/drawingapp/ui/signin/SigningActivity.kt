@@ -43,12 +43,9 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
             launchActivity<SignupActivity>(REQUEST_CODE)
         })
         btn_sign_in.setOnClickListener({
-            toast("User id = ${presenter.currentUserId}")
-            if (preferences.getString(CURRENT_USER_ID, "").isEmpty()) {
-                val login = username_edittext.text.toString()
-                val password = password_edittext.text.toString()
-                presenter.checkUserAndSignIn(login, password)
-            }
+            val login = username_edittext.text.toString()
+            val password = password_edittext.text.toString()
+            presenter.checkUserAndSignIn(login, password)
         })
     }
 
@@ -72,7 +69,7 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when(requestCode) {
             Activity.RESULT_OK -> showSigninSuccess()
-            else -> super.onActivityResult(requestCode, resultCode, data)
+            else -> toast("Could not be saved")
         }
     }
 

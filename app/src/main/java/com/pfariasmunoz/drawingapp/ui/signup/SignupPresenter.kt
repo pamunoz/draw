@@ -1,12 +1,10 @@
 package com.pfariasmunoz.drawingapp.ui.signup
 
+import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
-import com.pfariasmunoz.drawingapp.util.exist
-import com.pfariasmunoz.drawingapp.util.isNotNull
 import com.pfariasmunoz.drawingapp.util.launchSilent
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -28,19 +26,17 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
     }
 
     override fun saveUser(login: String, password: String, confirmPassword: String) = launchSilent(uiContext) {
-        if (checkedPasswords(password, confirmPassword)) {
+        if (password == confirmPassword) {
             currentUser = User(login = login, password = password)
-            if (currentUser.isNotNull()) {
-                usersDataSource.saveUser(currentUser!!)
-                if (currentUser?.id!!.isNotBlank()) view.registerUser()
+            val result = usersDataSource.saveUser(currentUser!!)
+            when(result) {
+                is Result.Success -> view.registerUser()
+                else -> view.showErronPassowdsDontMantch()
             }
         } else {
             view.showErronPassowdsDontMantch()
         }
     }
 
-    private fun checkedPasswords(firstPassWord: String, secondPassword: String): Boolean {
-        return firstPassWord == secondPassword
-    }
 
 }

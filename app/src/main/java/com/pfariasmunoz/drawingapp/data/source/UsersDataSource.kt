@@ -7,7 +7,7 @@ interface UsersDataSource {
     suspend fun getUsers(): Result<List<User>>
     suspend fun getUserById(userId: String): Result<User>
     suspend fun getUserByPassword(userPassword: String): Result<User>
-    suspend fun saveUser(user: User)
+    suspend fun saveUser(user: User): Result<String>
     suspend fun deleteAllUsers()
     suspend fun deleteUser(userId: String): Int
     suspend fun updateUser(user: User): Int
