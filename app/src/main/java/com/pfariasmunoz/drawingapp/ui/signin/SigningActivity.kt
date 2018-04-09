@@ -27,8 +27,11 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
-        presenter.setupView(this)
-        if (presenter.currentUserId.isNotEmpty()) signin()
+        with(presenter) {
+            setupView(this@SigningActivity)
+            currentUserId = preferences.getString(CURRENT_USER_ID, "")
+            if (currentUserId.isNotEmpty()) signin()
+        }
         setListeners()
     }
 
