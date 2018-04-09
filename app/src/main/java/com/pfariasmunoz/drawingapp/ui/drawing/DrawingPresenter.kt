@@ -36,26 +36,6 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
         this.view = view
     }
 
-    override fun loadUserDrawing() = launchSilent(uiContext) {
-        val result = usersDataSource.getUserById(view.currentUserId)
-        when(result) {
-            is Result.Success -> {
-                //val currentUser = result.data
-                //val currentDrawing = currentUser.drawing?.toBitmap
-                //if (currentDrawing.isNotNull()) view.draw(currentDrawing!!)
-            }
-        }
-    }
-
-    override fun saveUser() = launchSilent(uiContext) {
-        val result = usersDataSource.getUserById(view.currentUserId)
-        when(result) {
-            is Result.Success -> {
-                val user = result.data
-                usersDataSource.updateUser(user)
-            }
-        }
-    }
 
     override fun saveBitmap(bitmap: Bitmap) {
         val file = Environment.getExternalStorageDirectory()
