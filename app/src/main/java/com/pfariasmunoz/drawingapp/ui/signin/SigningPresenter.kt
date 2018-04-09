@@ -3,7 +3,6 @@ package com.pfariasmunoz.drawingapp.ui.signin
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.di.Injector
-import com.pfariasmunoz.drawingapp.util.exist
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
@@ -21,6 +20,11 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
 
     override var currentUserId: String = ""
 
+    /**
+     * This method should be called at the start of the Activity so
+     * it can use the presenter's data
+     * @param view the view that will use the presenter
+     */
     override fun setupView(view: SingingContract.View) {
         this.view = view
     }

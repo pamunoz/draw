@@ -2,8 +2,6 @@ package com.pfariasmunoz.drawingapp.ui.signin
 
 interface SingingContract {
 
-
-
     interface View {
         fun setCurrentUser(id: String)
         fun showSigninError()
