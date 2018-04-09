@@ -23,7 +23,13 @@
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/btn_load_drawing"
+            style="@style/button_list"
+            android:text="@string/btn_load"/>
+
+        <Button
             android:id="@+id/btn_clear_drawing"
+            android:layout_below="@id/btn_load_drawing"
             style="@style/button_list"
             android:text="@string/btn_clear"/>
 

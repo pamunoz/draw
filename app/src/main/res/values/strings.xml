@@ -23,4 +23,5 @@
     <string name="btn_save">Save</string>
     <string name="btn_clear">Clear</string>
     <string name="btn_ok">Ok</string>
+    <string name="btn_load">Load</string>
 </resources>

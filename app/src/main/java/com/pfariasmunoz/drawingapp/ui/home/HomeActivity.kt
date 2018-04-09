@@ -14,8 +14,6 @@ import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -25,8 +23,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         btn_draw.setOnClickListener({
-            launchActivity<DrawActivity>()
-            //launchActivity<DrawingActivity>()
+            //launchActivity<DrawActivity>()
+            launchActivity<DrawingActivity>()
         })
         btn_users_list.setOnClickListener({
             launchActivity<UserListActivity>()

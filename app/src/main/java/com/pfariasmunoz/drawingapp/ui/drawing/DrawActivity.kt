@@ -117,7 +117,7 @@ class DrawActivity : AppCompatActivity(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        val tempBitmap: Bitmap
+            val tempBitmap: Bitmap
 
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
