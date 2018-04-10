@@ -50,16 +50,28 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
     private fun setupListeners() {
 
         btn_load_drawing.setOnClickListener({
-            simpleDrawingView1.loadBitmap(preferences.getString(CURRENT_USER_ID, ""))
+            presenter.loadBitmap()
         })
 
         btn_save_drawing.setOnClickListener({
-            simpleDrawingView1.isDrawingCacheEnabled = true
-            simpleDrawingView1.saveBitmap(preferences.getString(CURRENT_USER_ID, ""))
+            presenter.saveBitmap()
         })
 
         btn_clear_drawing.setOnClickListener({
-            simpleDrawingView1.clear()
+            presenter.eraseBitmap()
         })
+    }
+
+    override fun saveDrawing() {
+        simpleDrawingView1.isDrawingCacheEnabled = true
+        simpleDrawingView1.saveBitmap(preferences.getString(CURRENT_USER_ID, ""))
+    }
+
+    override fun loadDrawing() {
+        simpleDrawingView1.loadBitmap(preferences.getString(CURRENT_USER_ID, ""))
+    }
+
+    override fun eraseDrawing() {
+        simpleDrawingView1.clear()
     }
 }

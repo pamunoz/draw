@@ -103,6 +103,8 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
     }
 
     fun clear() {
+        val unmutableBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        mBitmap = unmutableBitmap.copy(Bitmap.Config.ARGB_8888, true)
         mBitmap?.eraseColor(Color.WHITE)
         invalidate()
         System.gc()

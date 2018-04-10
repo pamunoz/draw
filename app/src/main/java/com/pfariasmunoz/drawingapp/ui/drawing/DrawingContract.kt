@@ -6,9 +6,14 @@ import android.graphics.Bitmap
 interface DrawingContract {
     interface View {
         val currentUserId: String
+        fun saveDrawing()
+        fun loadDrawing()
+        fun eraseDrawing()
     }
     interface Presenter {
         fun setupView(view: View)
-        fun saveBitmap(bitmap: Bitmap)
+        fun saveBitmap()
+        fun loadBitmap()
+        fun eraseBitmap()
     }
 }

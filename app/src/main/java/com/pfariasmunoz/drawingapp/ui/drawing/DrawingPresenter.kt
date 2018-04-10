@@ -34,23 +34,21 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
     }
 
 
-    override fun saveBitmap(bitmap: Bitmap) = launchSilent(appExecutors.uiContext) {
+    override fun saveBitmap() = launchSilent(appExecutors.uiContext) {
         async(appExecutors.ioContext) {
-            val file = Environment.getExternalStorageDirectory()
-            val newFile = File(file, "${view.currentUserId}.jpg")
+           view.saveDrawing()
+        }
+    }
 
-            try {
-                val fileOutputStream = FileOutputStream(newFile)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-                fileOutputStream.flush()
-                fileOutputStream.close()
+    override fun loadBitmap() = launchSilent(appExecutors.uiContext) {
+        async(appExecutors.ioContext) {
+            view.loadDrawing()
+        }
+    }
 
-            } catch (e: FileNotFoundException) {
-                e.printStackTrace()
-
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+    override fun eraseBitmap() = launchSilent(appExecutors.uiContext) {
+        async(appExecutors.ioContext) {
+            view.eraseDrawing()
         }
     }
 }
