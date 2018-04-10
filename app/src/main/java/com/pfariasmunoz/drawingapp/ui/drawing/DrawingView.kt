@@ -17,6 +17,9 @@ import java.io.IOException
  */
 class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) {
 
+    /**
+     * The bitmap to which the drawing is make
+     */
     var mBitmap: Bitmap? = null
     lateinit var mCanvas: Canvas
     private val mPath: Path

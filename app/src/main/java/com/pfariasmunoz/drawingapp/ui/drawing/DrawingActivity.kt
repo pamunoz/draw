@@ -1,6 +1,5 @@
 package com.pfariasmunoz.drawingapp.ui.drawing
 
-import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
@@ -13,12 +12,15 @@ import com.pfariasmunoz.drawingapp.util.launchActivity
 import com.pfariasmunoz.drawingapp.util.preferences
 import kotlinx.android.synthetic.main.activity_drawing.*
 
+/**
+ * This [DrawingContract.View] is in charge of the ui
+ * the user interaction with the drawing processes
+ */
 @Suppress("JoinDeclarationAndAssignment")
 class DrawingActivity : AppCompatActivity(), DrawingContract.View {
 
+    /** The presenter is injected and use for the async processes */
     val presenter: DrawingPresenter
-
-    var source: Uri? = null
 
     init {
         presenter = Injector.get().drawingPresenter()
@@ -47,6 +49,12 @@ class DrawingActivity : AppCompatActivity(), DrawingContract.View {
         setupListeners()
     }
 
+    /**
+     * Set the listener for the button in the drawing activity.
+     * The load load the image to be drawn on
+     * the save save the image to the internal storage
+     * the button clear erase the drawing of the activity
+     */
     private fun setupListeners() {
 
         btn_load_drawing.setOnClickListener({
