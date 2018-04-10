@@ -1,11 +1,11 @@
 package com.pfariasmunoz.drawingapp.ui.signup
 
 import com.pfariasmunoz.drawingapp.data.source.model.User
-
+/** The distribution of work between the view and the presenter */
 interface SignupContract {
     interface View {
         fun registerUser()
-        fun showErronPassowdsDontMantch()
+        fun showErrorPasswordsDontMantch()
     }
 
     interface Presenter {

@@ -9,9 +9,13 @@ import com.pfariasmunoz.drawingapp.di.Injector
 import com.pfariasmunoz.drawingapp.util.*
 import kotlinx.android.synthetic.main.activity_signup.*
 
-
+/**
+ * This [Activity] is in charge of the process of singing up
+ */
+@Suppress("JoinDeclarationAndAssignment")
 class SignupActivity : AppCompatActivity(), SignupContract.View {
 
+    /** The [SignupContract.Presenter] in charge of the logic */
     val presenter: SignupPresenter
 
     init {
@@ -27,6 +31,11 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
         setListeners()
     }
 
+    /**
+     * Set the listener for the sign up button and the sign up button.
+     * The sign in button start SingingActivity.
+     * the sign up button add the user to the database.
+     */
     private fun setListeners() {
         btn_signin.setOnClickListener({
             finish()
@@ -40,15 +49,18 @@ class SignupActivity : AppCompatActivity(), SignupContract.View {
         })
     }
 
+    /**
+     * Add the user id to the preferences.
+     * And set the singing up process as successful
+     */
     override fun registerUser() {
         preferences.put(CURRENT_USER_ID, presenter.currentUser?.id)
         val returnIntent = Intent()
-        //returnIntent.putExtra(CURRENT_USER_ID, presenter.currentUser?.id)
         setResult(Activity.RESULT_OK, returnIntent)
         finish()
     }
 
-    override fun showErronPassowdsDontMantch() {
+    override fun showErrorPasswordsDontMantch() {
         okDialog(resources.getString(R.string.error_sign_up))
     }
 }
