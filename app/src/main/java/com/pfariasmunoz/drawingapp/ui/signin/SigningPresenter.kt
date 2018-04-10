@@ -7,11 +7,19 @@ import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
+/**
+ * This [SingingContract.Presenter] is in charge of the logic of
+ * singing in of the user.
+ */
+@Suppress("JoinDeclarationAndAssignment")
 class SigningPresenter @Inject constructor() : SingingContract.Presenter {
 
+    /** The [SingingContract.View] that is in charge of the users input */
     lateinit var view: SingingContract.View
-    val usersDataSource: UsersLocalDataSource
-    val uiContext: CoroutineContext
+    /** The repository for the user's data */
+    private val usersDataSource: UsersLocalDataSource
+    /** the context in which the ui work will be done */
+    private val uiContext: CoroutineContext
 
     init {
         this.usersDataSource = Injector.get().localUsersDataSource()
