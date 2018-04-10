@@ -68,12 +68,16 @@ class SigningActivity : AppCompatActivity(), SingingContract.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when(requestCode) {
-            Activity.RESULT_OK -> showSigninSuccess()
-            else -> toast("Could not be saved")
+            REQUEST_CODE -> {
+                when(resultCode) {
+                    Activity.RESULT_OK -> showSigninSuccess()
+                }
+            }
+            else -> toast(resources.getString(R.string.failure_sign_up))
         }
     }
 
     override fun showSigninSuccess() {
-        okDialog(resources.getString(R.string.success_sign_in))
+        okDialog(resources.getString(R.string.success_sign_up))
     }
 }
