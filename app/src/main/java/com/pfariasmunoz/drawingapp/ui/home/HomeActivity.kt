@@ -12,6 +12,9 @@ import com.pfariasmunoz.drawingapp.ui.userslist.UserListActivity
 import com.pfariasmunoz.drawingapp.util.*
 import kotlinx.android.synthetic.main.activity_home.*
 
+/**
+ * Activity in charge of the navigation between the singing process, drawing and user list processes
+ */
 class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +22,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
         setSupportActionBar(home_toolbar)
         supportActionBar?.apply {
-            //setDisplayHomeAsUpEnabled(true)
             val title = findViewById<TextView>(R.id.title_toolbar)
             title?.text = resources.getString(R.string.home_value)
             val button = findViewById<Button>(R.id.btn_toolbar)
@@ -29,14 +31,7 @@ class HomeActivity : AppCompatActivity() {
                 launchActivity<SigningActivity>()
             })
         }
-
-        btn_draw.setOnClickListener({
-            //launchActivity<DrawActivity>()
-            launchActivity<DrawingActivity>()
-        })
-        btn_users_list.setOnClickListener({
-            launchActivity<UserListActivity>()
-        })
+        setListeners()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -48,5 +43,20 @@ class HomeActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    /**
+     * Set the listener for the draw button and the user list button.
+     * The draw button start DrawingActivity.
+     * the user list button start the UserListActivity.
+     */
+    fun setListeners() {
+        btn_draw.setOnClickListener({
+            //launchActivity<DrawActivity>()
+            launchActivity<DrawingActivity>()
+        })
+        btn_users_list.setOnClickListener({
+            launchActivity<UserListActivity>()
+        })
     }
 }
