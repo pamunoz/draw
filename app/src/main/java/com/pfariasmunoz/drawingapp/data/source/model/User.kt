@@ -1,7 +1,6 @@
 package com.pfariasmunoz.drawingapp.data.source.model
 
 import android.arch.persistence.room.*
-import android.graphics.Bitmap
 import java.util.*
 
 /**

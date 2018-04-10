@@ -7,7 +7,6 @@ import com.pfariasmunoz.drawingapp.data.source.UsersDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.util.AppExecutors
 import kotlinx.coroutines.experimental.withContext
-import javax.inject.Inject
 
 class UsersLocalDataSource private constructor(
         val appExecutors: AppExecutors,

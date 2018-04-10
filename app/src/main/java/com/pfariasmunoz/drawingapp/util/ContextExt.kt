@@ -8,7 +8,6 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
@@ -51,20 +50,6 @@ inline fun <reified T : Any> Context.launchActivity(
 
 inline fun <reified T : Any> newIntent(context: Context): Intent =
         Intent(context, T::class.java)
-// DeviceDimensionsHelper.getDisplayWidth(context) => (display width in pixels)
-val Context.displayWidth: Int
-    get() = this.resources.displayMetrics.widthPixels
-// DeviceDimensionsHelper.getDisplayHeight(context) => (display height in pixels)
-val Context.displayHeight: Int
-    get() = this.resources.displayMetrics.heightPixels
-// DeviceDimensionsHelper.convertDpToPixel(25f, context) => (25dp converted to pixels)
-fun Context.dpToPixels(dp: Float): Float {
-    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, this.resources.displayMetrics)
-}
-// DeviceDimensionsHelper.convertPixelsToDp(25f, context) => (25px converted to dp)
-fun Context.pixelsToDp(px: Float): Float {
-    return px / (this.resources.displayMetrics.densityDpi / 160f)
-}
 
 val Context.preferences: SharedPreferences
     get() = this.getSharedPreferences("prefs", Context.MODE_PRIVATE)

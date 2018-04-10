@@ -10,7 +10,6 @@ import com.pfariasmunoz.drawingapp.ui.signup.SignupPresenter
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListPresenter
 import com.pfariasmunoz.drawingapp.util.AppExecutors
 import dagger.Component
-import kotlin.coroutines.experimental.CoroutineContext
 
 @Component(modules = [ContextModule::class, DatabaseModule::class])
 interface AppComponent {
