@@ -1,16 +1,23 @@
 package com.pfariasmunoz.drawingapp.ui.drawing
 
+import android.content.ContentValues
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
 
-
-
+/**
+ * This activity is in charge of the drawing actions.
+ */
 class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) {
 
-    lateinit var mBitmap: Bitmap
+    var mBitmap: Bitmap? = null
     lateinit var mCanvas: Canvas
     private val mPath: Path
     val mBitmapPaint: Paint
@@ -23,6 +30,7 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
     }
 
     init {
+        isDrawingCacheEnabled = true
         mPath = Path()
         mBitmapPaint = Paint(Paint.DITHER_FLAG).apply {
             setBackgroundColor(Color.WHITE)
@@ -46,7 +54,8 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        val unmutableBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
+        mBitmap = unmutableBitmap.copy(Bitmap.Config.ARGB_8888, true)
         mCanvas = Canvas(mBitmap)
     }
 
@@ -94,10 +103,42 @@ class DrawingView(context: Context, attrs: AttributeSet?): View(context, attrs) 
     }
 
     fun clear() {
-        mBitmap.eraseColor(Color.WHITE)
+        mBitmap?.eraseColor(Color.WHITE)
         invalidate()
         System.gc()
     }
 
+    fun saveBitmap(picName: String) {
+        var fos: FileOutputStream? = null
+        try {
+            fos = context.openFileOutput(picName, Context.MODE_PRIVATE)
+            mBitmap?.compress(Bitmap.CompressFormat.PNG, 100, fos)
+        } catch (e: FileNotFoundException) {
+            Log.d(ContentValues.TAG, "file not found")
+            e.printStackTrace()
+        } catch (e: IOException) {
+            Log.d(ContentValues.TAG, "io exception")
+            e.printStackTrace()
+        } finally {
+            fos?.close()
+        }
+    }
 
+    fun loadBitmap(picName: String) {
+        var b: Bitmap? = null
+        var fis: FileInputStream? = null
+        try {
+            fis = context.openFileInput(picName)
+            b = BitmapFactory.decodeStream(fis)
+        } catch (e: FileNotFoundException) {
+            Log.d(ContentValues.TAG, "file not found")
+            e.printStackTrace()
+        } catch (e: IOException) {
+            Log.d(ContentValues.TAG, "io exception")
+            e.printStackTrace()
+        } finally {
+            fis?.close()
+        }
+        mBitmap = b
+    }
 }
