@@ -19,6 +19,7 @@ import com.pfariasmunoz.drawingapp.util.preferences
 import kotlinx.android.synthetic.main.activity_drawing.*
 import java.io.FileNotFoundException
 
+@Suppress("JoinDeclarationAndAssignment")
 class DrawingActivity : AppCompatActivity(), DrawingContract.View {
 
     val presenter: DrawingPresenter

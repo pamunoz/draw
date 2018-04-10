@@ -7,10 +7,7 @@ import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
-import com.pfariasmunoz.drawingapp.util.isNotNull
-import com.pfariasmunoz.drawingapp.util.launchSilent
-import com.pfariasmunoz.drawingapp.util.toBitmap
-import com.pfariasmunoz.drawingapp.util.toByteArray
+import com.pfariasmunoz.drawingapp.util.*
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 import java.io.File
@@ -20,15 +17,16 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlin.coroutines.experimental.CoroutineContext
 
+@Suppress("JoinDeclarationAndAssignment")
 class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
 
     lateinit var view: DrawingContract.View
-    val usersDataSource : UsersLocalDataSource
-    val uiContext: CoroutineContext
+    private val usersDataSource : UsersLocalDataSource
+    private val appExecutors: AppExecutors
 
     init {
         this.usersDataSource = Injector.get().localUsersDataSource()
-        this.uiContext = Injector.get().coroutineUIContext()
+        this.appExecutors = Injector.get().appExecutors()
     }
 
     override fun setupView(view: DrawingContract.View) {
@@ -36,21 +34,23 @@ class DrawingPresenter @Inject constructor(): DrawingContract.Presenter {
     }
 
 
-    override fun saveBitmap(bitmap: Bitmap) {
-        val file = Environment.getExternalStorageDirectory()
-        val newFile = File(file, "${view.currentUserId}.jpg")
+    override fun saveBitmap(bitmap: Bitmap) = launchSilent(appExecutors.uiContext) {
+        async(appExecutors.ioContext) {
+            val file = Environment.getExternalStorageDirectory()
+            val newFile = File(file, "${view.currentUserId}.jpg")
 
-        try {
-            val fileOutputStream = FileOutputStream(newFile)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-            fileOutputStream.flush()
-            fileOutputStream.close()
+            try {
+                val fileOutputStream = FileOutputStream(newFile)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+                fileOutputStream.flush()
+                fileOutputStream.close()
 
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
 
-        } catch (e: IOException) {
-            e.printStackTrace()
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 }

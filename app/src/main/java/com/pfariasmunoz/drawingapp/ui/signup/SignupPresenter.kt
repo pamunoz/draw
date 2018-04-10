@@ -4,9 +4,9 @@ import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.data.source.model.User
 import com.pfariasmunoz.drawingapp.di.Injector
+import com.pfariasmunoz.drawingapp.util.AppExecutors
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
-import kotlin.coroutines.experimental.CoroutineContext
 
 /**
  * This [SignupContract.Presenter] is in charge of the logic of
@@ -20,11 +20,11 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
     /** The repository for the user's data */
     private val usersDataSource : UsersLocalDataSource
     /** the context in which the ui work will be done */
-    private val uiContext: CoroutineContext
+    private val appExecutors: AppExecutors
 
     init {
         this.usersDataSource = Injector.get().localUsersDataSource()
-        this.uiContext = Injector.get().coroutineUIContext()
+        this.appExecutors = Injector.get().appExecutors()
     }
 
     /** The user that will be create by the signing up process */
@@ -46,7 +46,7 @@ class SignupPresenter @Inject constructor() : SignupContract.Presenter {
      * @param confirmPassword the second password for confirmation that the user put in.
      */
     override fun saveUser(login: String, password: String, confirmPassword: String) =
-            launchSilent(uiContext) {
+            launchSilent(appExecutors.uiContext) {
         if (password == confirmPassword) {
             currentUser = User(login = login, password = password)
             val result = usersDataSource.saveUser(currentUser!!)

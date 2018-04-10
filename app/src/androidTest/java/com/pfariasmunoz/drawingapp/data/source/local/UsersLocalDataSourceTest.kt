@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.util.Log
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.model.User
-import com.pfariasmunoz.drawingapp.util.SingleExecutors
+import com.pfariasmunoz.drawingapp.util.AppExecutors
 import com.pfariasmunoz.drawingapp.util.runBlockingSilent
 import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
@@ -18,7 +18,6 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.runner.RunWith
-import java.util.*
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -34,7 +33,7 @@ class UsersLocalDataSourceTest {
                 UsersAppDatabase::class.java).build()
         // Make sure that we're not keeping a reference to the wrong instance.
         UsersLocalDataSource.clearInstance()
-        localDataSource = UsersLocalDataSource.getInstance(SingleExecutors(), database.usersDao())
+        localDataSource = UsersLocalDataSource.getInstance(AppExecutors(), database.usersDao())
     }
 
     @After
@@ -51,11 +50,11 @@ class UsersLocalDataSourceTest {
     @Test
     fun saveUser_retrieveUser() = runBlockingSilent {
         // Given a new User
-        val newUser = User(drawing = ByteArray(10),login = "Pablo", password = "iklru667")
+        val newUser = User(login = "Pablo", password = "iklru667")
         with(localDataSource) {
             saveUser(newUser)
             // Then the user can be retrieved from the persistent repository
-            val result = getUser(newUser.id)
+            val result = getUserById(newUser.id)
             assertThat(result, instanceOf(Result.Success::class.java))
             if (result is Result.Success) {
                 assertThat(result.data, `is`(newUser))
@@ -67,7 +66,7 @@ class UsersLocalDataSourceTest {
     fun deleteAllUsers_emptyListOfRetrievedUser() = runBlockingSilent {
         with(localDataSource) {
             // Given a new user in the persistent repository and a mocked callback
-            val newUser = User(drawing = ByteArray(10),login = "Pablo", password = "667ruikl")
+            val newUser = User(login = "Pablo", password = "667ruikl")
             saveUser(newUser)
 
             // When all users are deleted
@@ -83,8 +82,8 @@ class UsersLocalDataSourceTest {
     fun getUsers_retrieveSavedUsers() = runBlockingSilent {
         // Given 2 new tasks in the persistent repository
         with(localDataSource) {
-            val user1 = User(drawing = ByteArray(10),login = "Person1", password = "111qqq")
-            val user2 = User(drawing = ByteArray(10),login = "Person2", password = "222www")
+            val user1 = User(login = "Person1", password = "111qqq")
+            val user2 = User(login = "Person2", password = "222www")
 
             saveUser(user1)
             saveUser(user2)

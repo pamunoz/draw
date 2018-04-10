@@ -3,9 +3,9 @@ package com.pfariasmunoz.drawingapp.ui.userslist
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.di.Injector
+import com.pfariasmunoz.drawingapp.util.AppExecutors
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
-import kotlin.coroutines.experimental.CoroutineContext
 
 /**
  * This [UserListContract.Presenter] is in charge of the logic of
@@ -21,11 +21,11 @@ class UserListPresenter @Inject constructor(): UserListContract.Presenter {
     /** The repository for the user's data */
     private val usersDataSource : UsersLocalDataSource
     /** the context in which the ui work will be done */
-    private val uiContext: CoroutineContext
+    private val appExecutors: AppExecutors
 
     init {
         this.usersDataSource = Injector.get().localUsersDataSource()
-        this.uiContext = Injector.get().coroutineUIContext()
+        this.appExecutors = Injector.get().appExecutors()
     }
 
     /**
@@ -40,7 +40,7 @@ class UserListPresenter @Inject constructor(): UserListContract.Presenter {
     /**
      * Load the list of users from the repository
      */
-    override fun loadUsers() = launchSilent(uiContext) {
+    override fun loadUsers() = launchSilent(appExecutors.uiContext) {
         val result = usersDataSource.getUsers()
         when(result) {
             is Result.Success -> {

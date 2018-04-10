@@ -17,17 +17,6 @@ import kotlin.coroutines.experimental.CoroutineContext
 @Module
 class DatabaseModule {
 
-    val ioContext: CoroutineContext = DefaultDispatcher
-    val networkContext: CoroutineContext = newFixedThreadPoolContext(THREAD_COUNT, "networkIO")
-    val uiContext: CoroutineContext = UI
-    val appExecutors = AppExecutors(ioContext, networkContext, uiContext)
-
-    @Provides
-    fun provideAppExecutors(
-            ioContext: CoroutineContext = DefaultDispatcher,
-            networkContext: CoroutineContext = newFixedThreadPoolContext(THREAD_COUNT, "networkIO"),
-            uiContext: CoroutineContext = UI): AppExecutors = AppExecutors(ioContext, networkContext, uiContext)
-
     @Provides
     fun provideAppDatabase(context: Context): UsersAppDatabase =
             UsersAppDatabase.getInstance(context)
@@ -36,10 +25,10 @@ class DatabaseModule {
     fun provideUsersDao(database: UsersAppDatabase): UsersDao = database.usersDao()
 
     @Provides
-    fun provideUsersLocalDataSource(usersDao: UsersDao): UsersLocalDataSource = UsersLocalDataSource.getInstance(appExecutors, usersDao)
+    fun provideUsersLocalDataSource(appExecutors: AppExecutors, usersDao: UsersDao): UsersLocalDataSource = UsersLocalDataSource.getInstance(appExecutors, usersDao)
 
     @Provides
-    fun provideUiCoroutineContext(): CoroutineContext = uiContext
+    fun provideAppExecutors(): AppExecutors = AppExecutors()
 
 
 }

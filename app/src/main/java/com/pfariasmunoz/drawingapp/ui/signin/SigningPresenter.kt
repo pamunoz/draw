@@ -3,9 +3,9 @@ package com.pfariasmunoz.drawingapp.ui.signin
 import com.pfariasmunoz.drawingapp.data.Result
 import com.pfariasmunoz.drawingapp.data.source.local.UsersLocalDataSource
 import com.pfariasmunoz.drawingapp.di.Injector
+import com.pfariasmunoz.drawingapp.util.AppExecutors
 import com.pfariasmunoz.drawingapp.util.launchSilent
 import javax.inject.Inject
-import kotlin.coroutines.experimental.CoroutineContext
 
 /**
  * This [SingingContract.Presenter] is in charge of the logic of
@@ -19,11 +19,11 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
     /** The repository for the user's data */
     private val usersDataSource: UsersLocalDataSource
     /** the context in which the ui work will be done */
-    private val uiContext: CoroutineContext
+    private val appExecutors: AppExecutors
 
     init {
         this.usersDataSource = Injector.get().localUsersDataSource()
-        this.uiContext = Injector.get().coroutineUIContext()
+        this.appExecutors = Injector.get().appExecutors()
     }
 
     override var currentUserId: String = ""
@@ -43,7 +43,7 @@ class SigningPresenter @Inject constructor() : SingingContract.Presenter {
      * @param login the login for the user trying to sign in
      * @param password the password for the user trying to sign in
      */
-    override fun checkUserAndSignIn(login: String, password: String) = launchSilent(uiContext) {
+    override fun checkUserAndSignIn(login: String, password: String) = launchSilent(appExecutors.uiContext) {
         val result = usersDataSource.getUserByPassword(password)
         when (result) {
             is Result.Success -> {

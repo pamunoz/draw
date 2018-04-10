@@ -8,11 +8,13 @@ import com.pfariasmunoz.drawingapp.ui.drawing.DrawingPresenter
 import com.pfariasmunoz.drawingapp.ui.signin.SigningPresenter
 import com.pfariasmunoz.drawingapp.ui.signup.SignupPresenter
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListPresenter
+import com.pfariasmunoz.drawingapp.util.AppExecutors
 import dagger.Component
 import kotlin.coroutines.experimental.CoroutineContext
 
 @Component(modules = [ContextModule::class, DatabaseModule::class])
 interface AppComponent {
+
     fun appContext(): Context
 
     fun signupPresenter(): SignupPresenter
@@ -25,7 +27,7 @@ interface AppComponent {
 
     fun localUsersDataSource(): UsersLocalDataSource
 
-    fun coroutineUIContext(): CoroutineContext
+    fun appExecutors(): AppExecutors
 
 
 }
