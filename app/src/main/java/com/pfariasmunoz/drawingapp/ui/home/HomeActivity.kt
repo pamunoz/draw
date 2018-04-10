@@ -12,6 +12,7 @@ import com.pfariasmunoz.drawingapp.ui.signin.SigningActivity
 import com.pfariasmunoz.drawingapp.ui.userslist.UserListActivity
 import com.pfariasmunoz.drawingapp.util.*
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.coroutines.experimental.async
 
 /**
  * Activity in charge of the navigation between the singing process, drawing and user list processes
@@ -53,7 +54,6 @@ class HomeActivity : AppCompatActivity() {
      */
     fun setListeners() {
         btn_draw.setOnClickListener({
-            //launchActivity<DrawActivity>()
             launchActivity<DrawingActivity>()
         })
         btn_users_list.setOnClickListener({
